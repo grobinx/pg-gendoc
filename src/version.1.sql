@@ -6,6 +6,8 @@ AS $function$
 /**
  * Version of this package
  *
+ * @author Andrzej Kałuża
+ * @created 2025-01-24
  * @return {varchar} 'major.minor.release'
  * @since 1.0
  */
