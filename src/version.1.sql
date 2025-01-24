@@ -1,4 +1,5 @@
 --DROP FUNCTION gendoc.version();
+
 CREATE OR REPLACE FUNCTION gendoc.version()
  RETURNS varchar
  LANGUAGE plpgsql
@@ -15,6 +16,6 @@ begin
   return '2.0.0';
 end;
 $function$;
---
+
 ALTER FUNCTION gendoc.version() OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.version() IS '';
+COMMENT ON FUNCTION gendoc.version() IS 'Version of this package';
