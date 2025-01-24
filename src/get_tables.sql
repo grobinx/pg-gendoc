@@ -5,7 +5,7 @@ CREATE OR REPLACE FUNCTION gendoc.get_tables(aschema name, ainclude character va
  LANGUAGE plpgsql
 AS $function$
 /**
- * Create jsonb with all usable information about tables on schemat
+ * Create jsonb with all usable information about tables on schema
  * 
  * @param {name} aschema schema name
  * @param {varchar[]} ainclude include tables
@@ -15,6 +15,7 @@ AS $function$
  * @author Andrzej Kałuża
  * @created 2025-01-24
  * @version 1.0
+ * @since 2.0
  */
 begin
   return jsonb_agg(
