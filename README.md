@@ -1,0 +1,3 @@
+temporary content...
+
+GENDOC is package for PostgreSQL to generate jsdoc style technical documentation of schema
