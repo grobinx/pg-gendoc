@@ -23,7 +23,8 @@ begin
              'schema_name', n.nspname, 'routine_name', p.proname,
              'kind', case p.prokind when 'f'::char then 'function' when 'p'::char then 'procedure' end,
              'returns', pg_get_function_result(p.oid), 'arguments', a.arguments,
-             'description', d.description, 'data_doc', gendoc.jsdoc_parse(substring(pg_get_functiondef(p.oid) from '\/\*\*.*\*\/'))
+             'description', d.description, 'data_doc', gendoc.jsdoc_parse(substring(pg_get_functiondef(p.oid) from '\/\*\*.*\*\/')),
+             'identity_name', p.proname||'('||coalesce(pg_get_function_identity_arguments(p.oid), '')||')'
            )
            order by n.nspname, p.proname
          )

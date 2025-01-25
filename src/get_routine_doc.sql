@@ -9,7 +9,7 @@ AS $function$
  *
  * @param {name} aschema schema name
  * @param {text} aroutine routine identity name
- * @returnsjsonb
+ * @returns {jsonb}
  *
  * @author Andrzej Kałuża
  * @created 2025-01-25
