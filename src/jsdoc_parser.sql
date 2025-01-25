@@ -1,15 +1,17 @@
 --DROP FUNCTION gendoc.jsdoc_parse(str character varying);
-CREATE OR REPLACE FUNCTION gendoc.jsdoc_parse(str character varying)
- RETURNS jsonb
- LANGUAGE plpgsql
- STABLE
-AS $function$
+
+create or replace function gendoc.jsdoc_parse(str varchar)
+  returns jsonb
+  language plpgsql
+  stable
+as $fn$
 /**
  * Function parse jsdoc and returns jsonb structure<br />
  * Function remove comment characters from string.
  * 
  * @author cmtdoc parser (https://github.com/grobinx/cmtdoc-parser)
- * @created Fri Jan 24 2025 12:22:57 GMT+0100 (czas środkowoeuropejski standardowy)
+ * @created Sat Jan 25 2025 16:36:31 GMT+0100 (czas środkowoeuropejski standardowy)
+ * @version 1.1.8
  * 
  * @param {varchar|text} str string to parse
  * @returns {jsonb}
@@ -407,8 +409,27 @@ begin
     union all
     -- @test
     select 'test' as figure, to_jsonb(true) as object
-      from regexp_matches(str, '@(test)[[:>:]]') r) r;
+      from regexp_matches(str, '@(test)[[:>:]]') r
+    union all
+    -- @column {type} name [description]
+    select 'column' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
+      from (select r[3] as "type", r[5] as "name", r[7] as "description"
+              from regexp_matches(str, '@(column)(\s*{([^{]*)?})?(\s+([^\s@)<{}]+))(\s*([^@]*)?)?', 'g') r) r
+    having jsonb_agg(row_to_json(r)::jsonb) is not null
+    union all
+    -- @table {type} name [description]
+    select 'table' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
+      from (select r[3] as "type", r[5] as "name", r[7] as "description"
+              from regexp_matches(str, '@(table)(\s*{([^{]*)?})?(\s+([^\s@)<{}]+))(\s*([^@]*)?)?', 'g') r) r
+    having jsonb_agg(row_to_json(r)::jsonb) is not null
+    union all
+    -- @sequence|generator name [description]
+    select 'sequence' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
+      from (select r[3] as "name", r[5] as "description"
+              from regexp_matches(str, '@(sequence|generator)(\s+([^\s@)<{}]+))(\s*([^@]*)?)?', 'g') r) r
+    having jsonb_agg(row_to_json(r)::jsonb) is not null) r;
 end;
-$function$;
+$fn$;
+
 ALTER FUNCTION gendoc.jsdoc_parse(str character varying) OWNER TO gendoc;
 COMMENT ON FUNCTION gendoc.jsdoc_parse(str character varying) IS '';
