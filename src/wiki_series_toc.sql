@@ -1,6 +1,6 @@
---DROP FUNCTION gendoc.wiki_create_toc(aitems jsonb, aname character varying);
+--DROP FUNCTION gendoc.wiki_series_toc(aitems jsonb, aname character varying);
 
-CREATE OR REPLACE FUNCTION gendoc.wiki_create_toc(aitems jsonb, aname character varying)
+CREATE OR REPLACE FUNCTION gendoc.wiki_series_toc(aitems jsonb, aname character varying)
  RETURNS text
  LANGUAGE plpgsql
  IMMUTABLE
@@ -25,5 +25,5 @@ begin
 end;
 $function$;
 
-ALTER FUNCTION gendoc.wiki_create_toc(aitems jsonb, aname character varying) OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.wiki_create_toc(aitems jsonb, aname character varying) IS 'Create table of content from jsonb array as Wiki markup code';
+ALTER FUNCTION gendoc.wiki_series_toc(aitems jsonb, aname character varying) OWNER TO gendoc;
+COMMENT ON FUNCTION gendoc.wiki_series_toc(aitems jsonb, aname character varying) IS 'Create table of content from jsonb array as Wiki markup code';

@@ -11,9 +11,9 @@ AS $function$
  * @param {jsonb} aoptions options to generate documentation
  * @returns {record} schema, version, routines, tables, views
  * 
- * @property {text[]} objects.objects objects that are to appear in the documentation (routines, tables, views)
- * @property {text[]} rotuines|tables|views.include object include name list 
- * @property {text[]} rotuines|tables|views.exclued object exclude name list 
+ * @property {string[]} objects.objects objects that are to appear in the documentation (routines, tables, views)
+ * @property {string[]} rotuines|tables|views.include include name list 
+ * @property {string[]} rotuines|tables|views.exclude exclude name list 
  *
  * @author Andrzej Kałuża
  * @created 2025-01-26
