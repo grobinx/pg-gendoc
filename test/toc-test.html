@@ -1,52 +1,66 @@
 <ol>
-    <li><a href="#get_package_version"><code>get_package_version</code></a></li>
-    <li><a href="#get_routine_doc"><code>get_routine_doc</code></a><span>Function parse jsdoc data from body by identity
-            name.</span></li>
-    <li><a href="#get_routines"><code>get_routines</code></a><span>Create jsonb with all usable information about
-            functions on schema</span></li>
-    <li><a href="#get_schema"><code>get_schema</code></a><span>Create jsonb with all usable information about
-            schema</span></li>
-    <li><a href="#get_tables"><code>get_tables</code></a><span>Create jsonb with all usable information about tables on
-            schemat</span></li>
-    <li><a href="#get_views"><code>get_views</code></a><span>Create jsonb with all usable information about views on
-            schema</span></li>
-    <li><a href="#html"><code>html</code></a></li>
-    <li><a href="#html"><code>html</code></a></li>
-    <li><a href="#html"><code>html</code></a></li>
-    <li><a href="#html_create_toc"><code>html_create_toc</code></a><span>Create table of content from jsonb array as
-            HTML code</span></li>
-    <li><a href="#html_function"><code>html_function</code></a></li>
-    <li><a href="#html_functions"><code>html_functions</code></a></li>
-    <li><a href="#html_functions_toc"><code>html_functions_toc</code></a></li>
-    <li><a href="#html_schema"><code>html_schema</code></a></li>
-    <li><a href="#html_table"><code>html_table</code></a></li>
-    <li><a href="#html_tables"><code>html_tables</code></a></li>
-    <li><a href="#html_tables_toc"><code>html_tables_toc</code></a></li>
-    <li><a href="#html_view"><code>html_view</code></a></li>
-    <li><a href="#html_views"><code>html_views</code></a></li>
-    <li><a href="#html_views_toc"><code>html_views_toc</code></a></li>
-    <li><a href="#htmlize_plain_h_text"><code>htmlize_plain_h_text</code></a></li>
-    <li><a href="#htmlize_plain_line"><code>htmlize_plain_line</code></a></li>
-    <li><a href="#htmlize_plain_ol_text"><code>htmlize_plain_ol_text</code></a></li>
-    <li><a href="#htmlize_plain_text"><code>htmlize_plain_text</code></a></li>
-    <li><a href="#htmlize_plain_ul_text"><code>htmlize_plain_ul_text</code></a></li>
-    <li><a href="#htmlize_plain_warning_text"><code>htmlize_plain_warning_text</code></a></li>
-    <li><a href="#htmlize_plain_wiki_block_text"><code>htmlize_plain_wiki_block_text</code></a></li>
-    <li><a href="#htmlize_plain_wiki_h_text"><code>htmlize_plain_wiki_h_text</code></a></li>
-    <li><a href="#htmlize_plain_wiki_table_text"><code>htmlize_plain_wiki_table_text</code></a></li>
-    <li><a href="#is_function_test"><code>is_function_test</code></a></li>
-    <li><a href="#is_private_routine"><code>is_private_routine</code></a><span>Check is routine is set as private. If
-            not set as private, returns false.</span></li>
-    <li><a href="#is_public_routine"><code>is_public_routine</code></a><span>Check is routine is set as public. If not
-            set as public, function returns true</span></li>
-    <li><a href="#is_test_routine"><code>is_test_routine</code></a><span>Check is routine is set as test.</span></li>
-    <li><a href="#jsdoc_parse"><code>jsdoc_parse</code></a></li>
-    <li><a href="#md_create_toc"><code>md_create_toc</code></a><span>Create table of content from jsonb array as
-            MarkDown code</span></li>
-    <li><a href="#parse_doc"><code>parse_doc</code></a></li>
-    <li><a href="#parse_doc_sections"><code>parse_doc_sections</code></a></li>
-    <li><a href="#tokenize_wiki_table"><code>tokenize_wiki_table</code></a></li>
-    <li><a href="#version"><code>version</code></a><span>Version of this package</span></li>
-    <li><a href="#wiki_create_toc"><code>wiki_create_toc</code></a><span>Create table of content from jsonb array as
-            Wiki markup code</span></li>
+        <li><a href="#routines" />Funkcje i procedury<ol>
+                        <li><a href="#_catch_exception"><code>_catch_exception</code></a></li>
+                        <li><a href="#_create_cron_line"><code>_create_cron_line</code></a></li>
+                        <li><a href="#_get_ctrl"><code>_get_ctrl</code></a></li>
+                        <li><a href="#_get_psql_opt"><code>_get_psql_opt</code></a></li>
+                        <li><a href="#_get_psql_opt"><code>_get_psql_opt</code></a></li>
+                        <li><a href="#_keylock"><code>_keylock</code></a></li>
+                        <li><a href="#_list"><code>_list</code></a></li>
+                        <li><a href="#_parse_cron_line"><code>_parse_cron_line</code></a></li>
+                        <li><a href="#_prepare_command"><code>_prepare_command</code></a></li>
+                        <li><a href="#_r_cron_id_seq"><code>_r_cron_id_seq</code></a></li>
+                        <li><a href="#_run"><code>_run</code></a></li>
+                        <li><a href="#_start"><code>_start</code></a></li>
+                        <li><a href="#_stop"><code>_stop</code></a></li>
+                        <li><a href="#_sys_crontab"><code>_sys_crontab</code></a></li>
+                        <li><a href="#_sys_crontab_l"><code>_sys_crontab_l</code></a></li>
+                        <li><a href="#_w_cron_id_seq"><code>_w_cron_id_seq</code></a></li>
+                        <li><a href="#active"><code>active</code></a></li>
+                        <li><a href="#add"><code>add</code></a></li>
+                        <li><a href="#change"><code>change</code></a></li>
+                        <li><a href="#clear_log"><code>clear_log</code></a></li>
+                        <li><a href="#frequence"><code>frequence</code></a></li>
+                        <li><a href="#isexists"><code>isexists</code></a></li>
+                        <li><a href="#pg_list"><code>pg_list</code></a></li>
+                        <li><a href="#remove"><code>remove</code></a></li>
+                        <li><a href="#run"><code>run</code></a></li>
+                        <li><a href="#run"><code>run</code></a></li>
+                        <li><a href="#version"><code>version</code></a></li>
+                        <li><a href="#web_active"><code>web_active</code></a></li>
+                        <li><a href="#web_add"><code>web_add</code></a></li>
+                        <li><a href="#web_change"><code>web_change</code></a></li>
+                        <li><a href="#web_frequence"><code>web_frequence</code></a></li>
+                        <li><a href="#web_json_list"><code>web_json_list</code></a></li>
+                        <li><a href="#web_json_list_get"><code>web_json_list_get</code></a></li>
+                        <li><a href="#web_json_log_list"><code>web_json_log_list</code></a></li>
+                        <li><a href="#web_json_log_list_get"><code>web_json_log_list_get</code></a></li>
+                        <li><a href="#web_list"><code>web_list</code></a></li>
+                        <li><a href="#web_log_list"><code>web_log_list</code></a></li>
+                        <li><a href="#web_remove"><code>web_remove</code></a></li>
+                </ol>
+        </li>
+        <li><a href="#tables" />Tabele<ol>
+                        <li><a href="#ctrl"><code>ctrl</code></a>
+                                <p>Tablica ctrl zawiera wartości parametrów konfiguracji mechanizmu CRON po stronie bazy
+                                        danych. Takie jak użytkownik i hasło. Tabela ctrl jest dostępna tylko dla
+                                        użytkownika CRON.</p>
+                        </li>
+                        <li><a href="#log"><code>log</code></a>
+                                <p>Tablica logująca zawiera informacje o czasie wykonania, godzinie rozpoczęcia oraz
+                                        godzinie zakończenia, informacje czy zadanie zakończyło się sukcesem oraz jeśli
+                                        zadanie zakończyło się wyjątkiem – jego treść. Rekord do tablicy dodawany jest w
+                                        chwili rozpoczęcia zadania. Gdy zadanie się zakończy uaktualniana jest tylko
+                                        informacja o czasie jego zakończenia. </p>
+                        </li>
+                </ol>
+        </li>
+        <li><a href="#views" />Widoki<ol>
+                        <li><a href="#_crontab_l"><code>_crontab_l</code></a></li>
+                        <li><a href="#pg_list"><code>pg_list</code></a>
+                                <p>Lista aktualnych zadań CRON dla aktualnej bazy danych.
+                                        Superuser widzi zadania z wszystkich baz danych.</p>
+                        </li>
+                </ol>
+        </li>
 </ol>

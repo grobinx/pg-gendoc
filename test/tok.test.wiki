@@ -1,40 +1,46 @@
-## [[#get_package_version|<code>get_package_version</code>]]
-## [[#get_routine_doc|<code>get_routine_doc</code>]] Function parse jsdoc data from body by identity name.
-## [[#get_routines|<code>get_routines</code>]] Create jsonb with all usable information about functions on schema
-## [[#get_schema|<code>get_schema</code>]] Create jsonb with all usable information about schema
-## [[#get_tables|<code>get_tables</code>]] Create jsonb with all usable information about tables on schemat
-## [[#get_views|<code>get_views</code>]] Create jsonb with all usable information about views on schema
-## [[#html|<code>html</code>]]
-## [[#html|<code>html</code>]]
-## [[#html|<code>html</code>]]
-## [[#html_create_toc|<code>html_create_toc</code>]] Create table of content from jsonb array as HTML code
-## [[#html_function|<code>html_function</code>]]
-## [[#html_functions|<code>html_functions</code>]]
-## [[#html_functions_toc|<code>html_functions_toc</code>]]
-## [[#html_schema|<code>html_schema</code>]]
-## [[#html_table|<code>html_table</code>]]
-## [[#html_tables|<code>html_tables</code>]]
-## [[#html_tables_toc|<code>html_tables_toc</code>]]
-## [[#html_view|<code>html_view</code>]]
-## [[#html_views|<code>html_views</code>]]
-## [[#html_views_toc|<code>html_views_toc</code>]]
-## [[#htmlize_plain_h_text|<code>htmlize_plain_h_text</code>]]
-## [[#htmlize_plain_line|<code>htmlize_plain_line</code>]]
-## [[#htmlize_plain_ol_text|<code>htmlize_plain_ol_text</code>]]
-## [[#htmlize_plain_text|<code>htmlize_plain_text</code>]]
-## [[#htmlize_plain_ul_text|<code>htmlize_plain_ul_text</code>]]
-## [[#htmlize_plain_warning_text|<code>htmlize_plain_warning_text</code>]]
-## [[#htmlize_plain_wiki_block_text|<code>htmlize_plain_wiki_block_text</code>]]
-## [[#htmlize_plain_wiki_h_text|<code>htmlize_plain_wiki_h_text</code>]]
-## [[#htmlize_plain_wiki_table_text|<code>htmlize_plain_wiki_table_text</code>]]
-## [[#is_function_test|<code>is_function_test</code>]]
-## [[#is_private_routine|<code>is_private_routine</code>]] Check is routine is set as private. If not set as private, returns false.
-## [[#is_public_routine|<code>is_public_routine</code>]] Check is routine is set as public. If not set as public, function returns true
-## [[#is_test_routine|<code>is_test_routine</code>]] Check is routine is set as test.
-## [[#jsdoc_parse|<code>jsdoc_parse</code>]]
-## [[#md_create_toc|<code>md_create_toc</code>]] Create table of content from jsonb array as MarkDown code
-## [[#parse_doc|<code>parse_doc</code>]]
-## [[#parse_doc_sections|<code>parse_doc_sections</code>]]
-## [[#tokenize_wiki_table|<code>tokenize_wiki_table</code>]]
-## [[#version|<code>version</code>]] Version of this package
-## [[#wiki_create_toc|<code>wiki_create_toc</code>]] Create table of content from jsonb array as Wiki markup code
+# [[#routines|Funkcje i procedury]]
+## [[#_catch_exception|<code>_catch_exception</code>]]
+## [[#_create_cron_line|<code>_create_cron_line</code>]]
+## [[#_get_ctrl|<code>_get_ctrl</code>]]
+## [[#_get_psql_opt|<code>_get_psql_opt</code>]]
+## [[#_get_psql_opt|<code>_get_psql_opt</code>]]
+## [[#_keylock|<code>_keylock</code>]]
+## [[#_list|<code>_list</code>]]
+## [[#_parse_cron_line|<code>_parse_cron_line</code>]]
+## [[#_prepare_command|<code>_prepare_command</code>]]
+## [[#_r_cron_id_seq|<code>_r_cron_id_seq</code>]]
+## [[#_run|<code>_run</code>]]
+## [[#_start|<code>_start</code>]]
+## [[#_stop|<code>_stop</code>]]
+## [[#_sys_crontab|<code>_sys_crontab</code>]]
+## [[#_sys_crontab_l|<code>_sys_crontab_l</code>]]
+## [[#_w_cron_id_seq|<code>_w_cron_id_seq</code>]]
+## [[#active|<code>active</code>]]
+## [[#add|<code>add</code>]]
+## [[#change|<code>change</code>]]
+## [[#clear_log|<code>clear_log</code>]]
+## [[#frequence|<code>frequence</code>]]
+## [[#isexists|<code>isexists</code>]]
+## [[#pg_list|<code>pg_list</code>]]
+## [[#remove|<code>remove</code>]]
+## [[#run|<code>run</code>]]
+## [[#run|<code>run</code>]]
+## [[#version|<code>version</code>]]
+## [[#web_active|<code>web_active</code>]]
+## [[#web_add|<code>web_add</code>]]
+## [[#web_change|<code>web_change</code>]]
+## [[#web_frequence|<code>web_frequence</code>]]
+## [[#web_json_list|<code>web_json_list</code>]]
+## [[#web_json_list_get|<code>web_json_list_get</code>]]
+## [[#web_json_log_list|<code>web_json_log_list</code>]]
+## [[#web_json_log_list_get|<code>web_json_log_list_get</code>]]
+## [[#web_list|<code>web_list</code>]]
+## [[#web_log_list|<code>web_log_list</code>]]
+## [[#web_remove|<code>web_remove</code>]]
+# [[#tables|Tabele]]
+## [[#ctrl|<code>ctrl</code>]] <p>Tablica ctrl zawiera wartości parametrów konfiguracji mechanizmu CRON po stronie bazy danych. Takie jak użytkownik i hasło. Tabela ctrl jest dostępna tylko dla użytkownika CRON.</p>
+## [[#log|<code>log</code>]] <p>Tablica logująca zawiera informacje o czasie wykonania, godzinie rozpoczęcia oraz godzinie zakończenia, informacje czy zadanie zakończyło się sukcesem oraz jeśli zadanie zakończyło się wyjątkiem – jego treść. Rekord do tablicy dodawany jest w chwili rozpoczęcia zadania. Gdy zadanie się zakończy uaktualniana jest tylko informacja o czasie jego zakończenia. </p>
+# [[#views|Widoki]]
+## [[#_crontab_l|<code>_crontab_l</code>]]
+## [[#pg_list|<code>pg_list</code>]] <p>Lista aktualnych zadań CRON dla aktualnej bazy danych.
+Superuser widzi zadania z wszystkich baz danych.</p>
