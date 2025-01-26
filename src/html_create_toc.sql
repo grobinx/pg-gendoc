@@ -3,9 +3,12 @@
 CREATE OR REPLACE FUNCTION gendoc.html_create_toc(aitems jsonb, aname character varying)
  RETURNS text
  LANGUAGE plpgsql
+ IMMUTABLE
 AS $function$
 /**
  * Create table of content from jsonb array as HTML code
+ *
+ * Level 2
  * 
  * @param {jsonb} aitems array with elements
  * @param {varchar} aname item name to show
@@ -17,7 +20,7 @@ AS $function$
  * @since 2.0
  */
 begin
-  return '<ol>'||string_agg('<li><a href="#'||(j->>aname)||'">'||(j->>aname)||'</a></li>', '')||'</ol>'
+  return '<ol>'||string_agg('<li><a href="#'||(j->>aname)||'"><code>'||(j->>aname)||'</code></a>'||coalesce('<span>'||(j->>'description')||'</span>', '')||'</li>', '')||'</ol>'
     from jsonb_array_elements(aitems) j;
 end;
 $function$;

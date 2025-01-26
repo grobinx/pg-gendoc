@@ -1,40 +1,52 @@
 <ol>
-    <li><a href="#_catch_exception">_catch_exception</a></li>
-    <li><a href="#_create_cron_line">_create_cron_line</a></li>
-    <li><a href="#_get_ctrl">_get_ctrl</a></li>
-    <li><a href="#_get_psql_opt">_get_psql_opt</a></li>
-    <li><a href="#_get_psql_opt">_get_psql_opt</a></li>
-    <li><a href="#_keylock">_keylock</a></li>
-    <li><a href="#_list">_list</a></li>
-    <li><a href="#_parse_cron_line">_parse_cron_line</a></li>
-    <li><a href="#_prepare_command">_prepare_command</a></li>
-    <li><a href="#_r_cron_id_seq">_r_cron_id_seq</a></li>
-    <li><a href="#_run">_run</a></li>
-    <li><a href="#_start">_start</a></li>
-    <li><a href="#_stop">_stop</a></li>
-    <li><a href="#_sys_crontab">_sys_crontab</a></li>
-    <li><a href="#_sys_crontab_l">_sys_crontab_l</a></li>
-    <li><a href="#_w_cron_id_seq">_w_cron_id_seq</a></li>
-    <li><a href="#active">active</a></li>
-    <li><a href="#add">add</a></li>
-    <li><a href="#change">change</a></li>
-    <li><a href="#clear_log">clear_log</a></li>
-    <li><a href="#frequence">frequence</a></li>
-    <li><a href="#isexists">isexists</a></li>
-    <li><a href="#pg_list">pg_list</a></li>
-    <li><a href="#remove">remove</a></li>
-    <li><a href="#run">run</a></li>
-    <li><a href="#run">run</a></li>
-    <li><a href="#version">version</a></li>
-    <li><a href="#web_active">web_active</a></li>
-    <li><a href="#web_add">web_add</a></li>
-    <li><a href="#web_change">web_change</a></li>
-    <li><a href="#web_frequence">web_frequence</a></li>
-    <li><a href="#web_json_list">web_json_list</a></li>
-    <li><a href="#web_json_list_get">web_json_list_get</a></li>
-    <li><a href="#web_json_log_list">web_json_log_list</a></li>
-    <li><a href="#web_json_log_list_get">web_json_log_list_get</a></li>
-    <li><a href="#web_list">web_list</a></li>
-    <li><a href="#web_log_list">web_log_list</a></li>
-    <li><a href="#web_remove">web_remove</a></li>
+    <li><a href="#get_package_version"><code>get_package_version</code></a></li>
+    <li><a href="#get_routine_doc"><code>get_routine_doc</code></a><span>Function parse jsdoc data from body by identity
+            name.</span></li>
+    <li><a href="#get_routines"><code>get_routines</code></a><span>Create jsonb with all usable information about
+            functions on schema</span></li>
+    <li><a href="#get_schema"><code>get_schema</code></a><span>Create jsonb with all usable information about
+            schema</span></li>
+    <li><a href="#get_tables"><code>get_tables</code></a><span>Create jsonb with all usable information about tables on
+            schemat</span></li>
+    <li><a href="#get_views"><code>get_views</code></a><span>Create jsonb with all usable information about views on
+            schema</span></li>
+    <li><a href="#html"><code>html</code></a></li>
+    <li><a href="#html"><code>html</code></a></li>
+    <li><a href="#html"><code>html</code></a></li>
+    <li><a href="#html_create_toc"><code>html_create_toc</code></a><span>Create table of content from jsonb array as
+            HTML code</span></li>
+    <li><a href="#html_function"><code>html_function</code></a></li>
+    <li><a href="#html_functions"><code>html_functions</code></a></li>
+    <li><a href="#html_functions_toc"><code>html_functions_toc</code></a></li>
+    <li><a href="#html_schema"><code>html_schema</code></a></li>
+    <li><a href="#html_table"><code>html_table</code></a></li>
+    <li><a href="#html_tables"><code>html_tables</code></a></li>
+    <li><a href="#html_tables_toc"><code>html_tables_toc</code></a></li>
+    <li><a href="#html_view"><code>html_view</code></a></li>
+    <li><a href="#html_views"><code>html_views</code></a></li>
+    <li><a href="#html_views_toc"><code>html_views_toc</code></a></li>
+    <li><a href="#htmlize_plain_h_text"><code>htmlize_plain_h_text</code></a></li>
+    <li><a href="#htmlize_plain_line"><code>htmlize_plain_line</code></a></li>
+    <li><a href="#htmlize_plain_ol_text"><code>htmlize_plain_ol_text</code></a></li>
+    <li><a href="#htmlize_plain_text"><code>htmlize_plain_text</code></a></li>
+    <li><a href="#htmlize_plain_ul_text"><code>htmlize_plain_ul_text</code></a></li>
+    <li><a href="#htmlize_plain_warning_text"><code>htmlize_plain_warning_text</code></a></li>
+    <li><a href="#htmlize_plain_wiki_block_text"><code>htmlize_plain_wiki_block_text</code></a></li>
+    <li><a href="#htmlize_plain_wiki_h_text"><code>htmlize_plain_wiki_h_text</code></a></li>
+    <li><a href="#htmlize_plain_wiki_table_text"><code>htmlize_plain_wiki_table_text</code></a></li>
+    <li><a href="#is_function_test"><code>is_function_test</code></a></li>
+    <li><a href="#is_private_routine"><code>is_private_routine</code></a><span>Check is routine is set as private. If
+            not set as private, returns false.</span></li>
+    <li><a href="#is_public_routine"><code>is_public_routine</code></a><span>Check is routine is set as public. If not
+            set as public, function returns true</span></li>
+    <li><a href="#is_test_routine"><code>is_test_routine</code></a><span>Check is routine is set as test.</span></li>
+    <li><a href="#jsdoc_parse"><code>jsdoc_parse</code></a></li>
+    <li><a href="#md_create_toc"><code>md_create_toc</code></a><span>Create table of content from jsonb array as
+            MarkDown code</span></li>
+    <li><a href="#parse_doc"><code>parse_doc</code></a></li>
+    <li><a href="#parse_doc_sections"><code>parse_doc_sections</code></a></li>
+    <li><a href="#tokenize_wiki_table"><code>tokenize_wiki_table</code></a></li>
+    <li><a href="#version"><code>version</code></a><span>Version of this package</span></li>
+    <li><a href="#wiki_create_toc"><code>wiki_create_toc</code></a><span>Create table of content from jsonb array as
+            Wiki markup code</span></li>
 </ol>

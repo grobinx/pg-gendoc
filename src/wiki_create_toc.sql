@@ -3,9 +3,12 @@
 CREATE OR REPLACE FUNCTION gendoc.wiki_create_toc(aitems jsonb, aname character varying)
  RETURNS text
  LANGUAGE plpgsql
+ IMMUTABLE
 AS $function$
 /**
  * Create table of content from jsonb array as Wiki markup code
+ *
+ * Level 2
  * 
  * @param {jsonb} aitems array with elements
  * @param {varchar} aname item name to show
@@ -17,7 +20,7 @@ AS $function$
  * @since 2.0
  */
 begin
-  return string_agg('# [[#'||(j->>aname)||'|'||(j->>aname)||']]', e'\n')
+  return string_agg('## [[#'||(j->>aname)||'|<code>'||(j->>aname)||'</code>]]'||coalesce(' '||(j->>'description'), ''), e'\n')
     from jsonb_array_elements(aitems) j;
 end;
 $function$;

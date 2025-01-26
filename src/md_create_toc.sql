@@ -3,9 +3,12 @@
 CREATE OR REPLACE FUNCTION gendoc.md_create_toc(aitems jsonb, aname character varying)
  RETURNS text
  LANGUAGE plpgsql
+ IMMUTABLE
 AS $function$
 /**
  * Create table of content from jsonb array as MarkDown code
+ *
+ * Level 2
  * 
  * @param {jsonb} aitems array with elements
  * @param {varchar} aname item name to show
@@ -18,7 +21,7 @@ AS $function$
  */
 begin
   return string_agg(line, e'\n')
-    from (select (row_number() over ())||'. ['||(j->>aname)||'](#'||(j->>aname)||')' line
+    from (select '  '||(row_number() over ())||'. [`'||(j->>aname)||'`](#'||(j->>aname)||')'||coalesce(' '||(j->>'description'), '') line
             from jsonb_array_elements(aitems) j) l;
 end;
 $function$;

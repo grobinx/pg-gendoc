@@ -1,0 +1,1 @@
+pg_dump.exe --file "dist/gendoc.sql" --host "raspberrypi" --port "5432" --username "postgres" --format=p --encoding "UTF8" --no-owner --no-privileges --no-tablespaces --no-unlogged-table-data --no-publications --no-subscriptions --no-security-labels --no-toast-compression --no-table-access-method --verbose --schema "gendoc" "home"

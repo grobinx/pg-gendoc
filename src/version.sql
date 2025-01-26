@@ -3,6 +3,7 @@
 CREATE OR REPLACE FUNCTION gendoc.version()
  RETURNS varchar
  LANGUAGE plpgsql
+ IMMUTABLE
 AS $function$
 /**
  * Version of this package
