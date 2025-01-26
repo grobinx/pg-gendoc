@@ -1,66 +1,262 @@
-<ol>
-        <li><a href="#routines" />Funkcje i procedury<ol>
-                        <li><a href="#_catch_exception"><code>_catch_exception</code></a></li>
-                        <li><a href="#_create_cron_line"><code>_create_cron_line</code></a></li>
-                        <li><a href="#_get_ctrl"><code>_get_ctrl</code></a></li>
-                        <li><a href="#_get_psql_opt"><code>_get_psql_opt</code></a></li>
-                        <li><a href="#_get_psql_opt"><code>_get_psql_opt</code></a></li>
-                        <li><a href="#_keylock"><code>_keylock</code></a></li>
-                        <li><a href="#_list"><code>_list</code></a></li>
-                        <li><a href="#_parse_cron_line"><code>_parse_cron_line</code></a></li>
-                        <li><a href="#_prepare_command"><code>_prepare_command</code></a></li>
-                        <li><a href="#_r_cron_id_seq"><code>_r_cron_id_seq</code></a></li>
-                        <li><a href="#_run"><code>_run</code></a></li>
-                        <li><a href="#_start"><code>_start</code></a></li>
-                        <li><a href="#_stop"><code>_stop</code></a></li>
-                        <li><a href="#_sys_crontab"><code>_sys_crontab</code></a></li>
-                        <li><a href="#_sys_crontab_l"><code>_sys_crontab_l</code></a></li>
-                        <li><a href="#_w_cron_id_seq"><code>_w_cron_id_seq</code></a></li>
-                        <li><a href="#active"><code>active</code></a></li>
-                        <li><a href="#add"><code>add</code></a></li>
-                        <li><a href="#change"><code>change</code></a></li>
-                        <li><a href="#clear_log"><code>clear_log</code></a></li>
-                        <li><a href="#frequence"><code>frequence</code></a></li>
-                        <li><a href="#isexists"><code>isexists</code></a></li>
-                        <li><a href="#pg_list"><code>pg_list</code></a></li>
-                        <li><a href="#remove"><code>remove</code></a></li>
-                        <li><a href="#run"><code>run</code></a></li>
-                        <li><a href="#run"><code>run</code></a></li>
-                        <li><a href="#version"><code>version</code></a></li>
-                        <li><a href="#web_active"><code>web_active</code></a></li>
-                        <li><a href="#web_add"><code>web_add</code></a></li>
-                        <li><a href="#web_change"><code>web_change</code></a></li>
-                        <li><a href="#web_frequence"><code>web_frequence</code></a></li>
-                        <li><a href="#web_json_list"><code>web_json_list</code></a></li>
-                        <li><a href="#web_json_list_get"><code>web_json_list_get</code></a></li>
-                        <li><a href="#web_json_log_list"><code>web_json_log_list</code></a></li>
-                        <li><a href="#web_json_log_list_get"><code>web_json_log_list_get</code></a></li>
-                        <li><a href="#web_list"><code>web_list</code></a></li>
-                        <li><a href="#web_log_list"><code>web_log_list</code></a></li>
-                        <li><a href="#web_remove"><code>web_remove</code></a></li>
-                </ol>
-        </li>
-        <li><a href="#tables" />Tabele<ol>
-                        <li><a href="#ctrl"><code>ctrl</code></a>
-                                <p>Tablica ctrl zawiera wartości parametrów konfiguracji mechanizmu CRON po stronie bazy
-                                        danych. Takie jak użytkownik i hasło. Tabela ctrl jest dostępna tylko dla
-                                        użytkownika CRON.</p>
-                        </li>
-                        <li><a href="#log"><code>log</code></a>
-                                <p>Tablica logująca zawiera informacje o czasie wykonania, godzinie rozpoczęcia oraz
-                                        godzinie zakończenia, informacje czy zadanie zakończyło się sukcesem oraz jeśli
-                                        zadanie zakończyło się wyjątkiem – jego treść. Rekord do tablicy dodawany jest w
-                                        chwili rozpoczęcia zadania. Gdy zadanie się zakończy uaktualniana jest tylko
-                                        informacja o czasie jego zakończenia. </p>
-                        </li>
-                </ol>
-        </li>
-        <li><a href="#views" />Widoki<ol>
-                        <li><a href="#_crontab_l"><code>_crontab_l</code></a></li>
-                        <li><a href="#pg_list"><code>pg_list</code></a>
-                                <p>Lista aktualnych zadań CRON dla aktualnej bazy danych.
-                                        Superuser widzi zadania z wszystkich baz danych.</p>
-                        </li>
-                </ol>
-        </li>
-</ol>
+<section id="toc">
+        <header>Spis treści</header>
+        <ol>
+                <li><a href="#routines" />Funkcje i procedury</a>
+                        <ol>
+                                <li><a href="#_catch_exception"><code>_catch_exception</code></a></li>
+                                <li><a href="#_create_cron_line"><code>_create_cron_line</code></a></li>
+                                <li><a href="#_get_ctrl"><code>_get_ctrl</code></a></li>
+                                <li><a href="#_get_psql_opt"><code>_get_psql_opt</code></a></li>
+                                <li><a href="#_get_psql_opt"><code>_get_psql_opt</code></a></li>
+                                <li><a href="#_keylock"><code>_keylock</code></a></li>
+                                <li><a href="#_list"><code>_list</code></a></li>
+                                <li><a href="#_parse_cron_line"><code>_parse_cron_line</code></a></li>
+                                <li><a href="#_prepare_command"><code>_prepare_command</code></a></li>
+                                <li><a href="#_r_cron_id_seq"><code>_r_cron_id_seq</code></a></li>
+                                <li><a href="#_run"><code>_run</code></a></li>
+                                <li><a href="#_start"><code>_start</code></a></li>
+                                <li><a href="#_stop"><code>_stop</code></a></li>
+                                <li><a href="#_sys_crontab"><code>_sys_crontab</code></a></li>
+                                <li><a href="#_sys_crontab_l"><code>_sys_crontab_l</code></a></li>
+                                <li><a href="#_w_cron_id_seq"><code>_w_cron_id_seq</code></a></li>
+                                <li><a href="#active"><code>active</code></a></li>
+                                <li><a href="#add"><code>add</code></a></li>
+                                <li><a href="#change"><code>change</code></a></li>
+                                <li><a href="#clear_log"><code>clear_log</code></a></li>
+                                <li><a href="#frequence"><code>frequence</code></a></li>
+                                <li><a href="#isexists"><code>isexists</code></a></li>
+                                <li><a href="#pg_list"><code>pg_list</code></a></li>
+                                <li><a href="#remove"><code>remove</code></a></li>
+                                <li><a href="#run"><code>run</code></a></li>
+                                <li><a href="#run"><code>run</code></a></li>
+                                <li><a href="#version"><code>version</code></a></li>
+                                <li><a href="#web_active"><code>web_active</code></a></li>
+                                <li><a href="#web_add"><code>web_add</code></a></li>
+                                <li><a href="#web_change"><code>web_change</code></a></li>
+                                <li><a href="#web_frequence"><code>web_frequence</code></a></li>
+                                <li><a href="#web_json_list"><code>web_json_list</code></a></li>
+                                <li><a href="#web_json_list_get"><code>web_json_list_get</code></a></li>
+                                <li><a href="#web_json_log_list"><code>web_json_log_list</code></a></li>
+                                <li><a href="#web_json_log_list_get"><code>web_json_log_list_get</code></a></li>
+                                <li><a href="#web_list"><code>web_list</code></a></li>
+                                <li><a href="#web_log_list"><code>web_log_list</code></a></li>
+                                <li><a href="#web_remove"><code>web_remove</code></a></li>
+                        </ol>
+                </li>
+                <li><a href="#tables" />Tabele</a>
+                        <ol>
+                                <li><a href="#ctrl"><code>ctrl</code></a>
+                                        <p>Tablica ctrl zawiera wartości parametrów konfiguracji mechanizmu CRON po
+                                                stronie bazy danych. Takie jak użytkownik i hasło. Tabela ctrl jest
+                                                dostępna tylko dla użytkownika CRON.</p>
+                                </li>
+                                <li><a href="#log"><code>log</code></a>
+                                        <p>Tablica logująca zawiera informacje o czasie wykonania, godzinie rozpoczęcia
+                                                oraz godzinie zakończenia, informacje czy zadanie zakończyło się
+                                                sukcesem oraz jeśli zadanie zakończyło się wyjątkiem – jego treść.
+                                                Rekord do tablicy dodawany jest w chwili rozpoczęcia zadania. Gdy
+                                                zadanie się zakończy uaktualniana jest tylko informacja o czasie jego
+                                                zakończenia. </p>
+                                </li>
+                        </ol>
+                </li>
+                <li><a href="#views" />Widoki</a>
+                        <ol>
+                                <li><a href="#_crontab_l"><code>_crontab_l</code></a></li>
+                                <li><a href="#pg_list"><code>pg_list</code></a>
+                                        <p>Lista aktualnych zadań CRON dla aktualnej bazy danych.
+                                                Superuser widzi zadania z wszystkich baz danych.</p>
+                                </li>
+                        </ol>
+                </li>
+        </ol>
+</section>
+<section id="tables">
+        <header>Tabele</header>
+        <section><a name="ctrl"></a>
+                <header>ctrl</header>
+                <p>Tablica ctrl zawiera wartości parametrów konfiguracji mechanizmu CRON po stronie bazy danych. Takie
+                        jak użytkownik i hasło. Tabela ctrl jest dostępna tylko dla użytkownika CRON.</p>
+                <table>
+                        <caption>Table columns</caption>
+                        <thead>
+                                <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default value</th>
+                                        <th>Null</th>
+                                        <th>PK</th>
+                                        <th>FK</th>
+                                        <th>Description</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td>1</td>
+                                        <td>name</td>
+                                        <td>name</td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>false</td>
+                                        <td>Nazwa parametru</td>
+                                </tr>
+                                <tr>
+                                        <td>2</td>
+                                        <td>value</td>
+                                        <td>text</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Wartość parametru</td>
+                                </tr>
+                        </tbody>
+                </table>
+        </section>
+        <section><a name="log"></a>
+                <header>log</header>
+                <p>Tablica logująca zawiera informacje o czasie wykonania, godzinie rozpoczęcia oraz godzinie
+                        zakończenia, informacje czy zadanie zakończyło się sukcesem oraz jeśli zadanie zakończyło się
+                        wyjątkiem – jego treść. Rekord do tablicy dodawany jest w chwili rozpoczęcia zadania. Gdy
+                        zadanie się zakończy uaktualniana jest tylko informacja o czasie jego zakończenia. </p>
+                <table>
+                        <caption>Table columns</caption>
+                        <thead>
+                                <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Default value</th>
+                                        <th>Null</th>
+                                        <th>PK</th>
+                                        <th>FK</th>
+                                        <th>Description</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td>1</td>
+                                        <td>ilog</td>
+                                        <td>bigserial</td>
+                                        <td>nextval('cron.log_ilog_seq'::regclass)</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>false</td>
+                                        <td>Identyfikator rekordu</td>
+                                </tr>
+                                <tr>
+                                        <td>2</td>
+                                        <td>start</td>
+                                        <td>timestamp without time zone</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Data i godzina rozpoczęcia zadania</td>
+                                </tr>
+                                <tr>
+                                        <td>3</td>
+                                        <td>stop</td>
+                                        <td>timestamp without time zone</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Data i godzina zakończenia zadania</td>
+                                </tr>
+                                <tr>
+                                        <td>4</td>
+                                        <td>minute</td>
+                                        <td>character varying</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Wartość kolumny minute z crona</td>
+                                </tr>
+                                <tr>
+                                        <td>5</td>
+                                        <td>hour</td>
+                                        <td>character varying</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Wartość kolumny hour z crona</td>
+                                </tr>
+                                <tr>
+                                        <td>6</td>
+                                        <td>dayofmonth</td>
+                                        <td>character varying</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Wartość kolumny dayofmonth z crona</td>
+                                </tr>
+                                <tr>
+                                        <td>7</td>
+                                        <td>month</td>
+                                        <td>character varying</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Wartość kolumny month z crona</td>
+                                </tr>
+                                <tr>
+                                        <td>8</td>
+                                        <td>dayofweek</td>
+                                        <td>character varying</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Wartość kolumny dayofweek z crona</td>
+                                </tr>
+                                <tr>
+                                        <td>9</td>
+                                        <td>command</td>
+                                        <td>text</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Wykonywana komenda SQL</td>
+                                </tr>
+                                <tr>
+                                        <td>10</td>
+                                        <td>jobid</td>
+                                        <td>numeric</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Wartość parametru abrokenflag</td>
+                                </tr>
+                                <tr>
+                                        <td>11</td>
+                                        <td>success</td>
+                                        <td>boolean</td>
+                                        <td>true</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Czy zadanie zakończyło się sukcesem</td>
+                                </tr>
+                                <tr>
+                                        <td>12</td>
+                                        <td>exception</td>
+                                        <td>text</td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>false</td>
+                                        <td>Treść wyjątku jeśli nastąpi</td>
+                                </tr>
+                        </tbody>
+                </table>
+        </section>
+</section>

@@ -1,4 +1,6 @@
-# [[#routines|Funkcje i procedury]]
+== Spis treści ==
+
+# <h3>[[#routines|Funkcje i procedury]]</h3>
 ## [[#_catch_exception|<code>_catch_exception</code>]]
 ## [[#_create_cron_line|<code>_create_cron_line</code>]]
 ## [[#_get_ctrl|<code>_get_ctrl</code>]]
@@ -37,10 +39,9 @@
 ## [[#web_list|<code>web_list</code>]]
 ## [[#web_log_list|<code>web_log_list</code>]]
 ## [[#web_remove|<code>web_remove</code>]]
-# [[#tables|Tabele]]
+# <h3>[[#tables|Tabele]]</h3>
 ## [[#ctrl|<code>ctrl</code>]] <p>Tablica ctrl zawiera wartości parametrów konfiguracji mechanizmu CRON po stronie bazy danych. Takie jak użytkownik i hasło. Tabela ctrl jest dostępna tylko dla użytkownika CRON.</p>
 ## [[#log|<code>log</code>]] <p>Tablica logująca zawiera informacje o czasie wykonania, godzinie rozpoczęcia oraz godzinie zakończenia, informacje czy zadanie zakończyło się sukcesem oraz jeśli zadanie zakończyło się wyjątkiem – jego treść. Rekord do tablicy dodawany jest w chwili rozpoczęcia zadania. Gdy zadanie się zakończy uaktualniana jest tylko informacja o czasie jego zakończenia. </p>
-# [[#views|Widoki]]
+# <h3>[[#views|Widoki]]</h3>
 ## [[#_crontab_l|<code>_crontab_l</code>]]
-## [[#pg_list|<code>pg_list</code>]] <p>Lista aktualnych zadań CRON dla aktualnej bazy danych.
-Superuser widzi zadania z wszystkich baz danych.</p>
+## [[#pg_list|<code>pg_list</code>]] <p>Lista aktualnych zadań CRON dla aktualnej bazy danych. Superuser widzi zadania z wszystkich baz danych.</p>

@@ -22,12 +22,14 @@ begin
     "en": {
       "routines": "Routines",
       "tables": "Tables",
-      "views": "Views"
+      "views": "Views",
+      "toc": "Table of content"
     },
     "pl": {
       "routines": "Funkcje i procedury",
       "tables": "Tabele",
-      "views": "Widoki"
+      "views": "Widoki",
+      "toc": "Spis treści"
     }
   }$$)::jsonb;
   --

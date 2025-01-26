@@ -13,6 +13,7 @@ AS $function$
  * @param {jsonb} aroutines routines series
  * @param {jsonb} atables tables series
  * @param {jsonb} aviews views series
+ * @param {jsonb} alocation tarnslation strings
  * @returns {text}
  * 
  * @author Andrzej Kałuża
@@ -23,23 +24,25 @@ AS $function$
 declare
   l_result text := '';
 begin
+  l_result := l_result || '<section id="toc"><header>'||(alocation->>'toc')||'</header>';
   l_result := l_result || '<ol>';
   if aroutines is not null then
-    l_result := l_result || '<li><a href="#routines" />'||(alocation->>'routines');
+    l_result := l_result || '<li><a href="#routines" />'||(alocation->>'routines')||'</a>';
     l_result := l_result || gendoc.html_series_toc(aroutines, 'routine_name');
     l_result := l_result || '</li>';
   end if;
   if atables is not null then
-    l_result := l_result || '<li><a href="#tables" />'||(alocation->>'tables');
+    l_result := l_result || '<li><a href="#tables" />'||(alocation->>'tables')||'</a>';
     l_result := l_result || gendoc.html_series_toc(atables, 'table_name');
     l_result := l_result || '</li>';
   end if;
   if aviews is not null then
-    l_result := l_result || '<li><a href="#views" />'||(alocation->>'views');
+    l_result := l_result || '<li><a href="#views" />'||(alocation->>'views')||'</a>';
     l_result := l_result || gendoc.html_series_toc(aviews, 'view_name');
     l_result := l_result || '</li>';
   end if;
   l_result := l_result || '</ol>';
+  l_result := l_result || '</section>';
   --
   return l_result;
 end;

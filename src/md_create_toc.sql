@@ -13,6 +13,7 @@ AS $function$
  * @param {jsonb} aroutines routines series
  * @param {jsonb} atables tables series
  * @param {jsonb} aviews views series
+ * @param {jsonb} alocation tarnslation strings
  * @returns {text}
  * 
  * @author Andrzej Kałuża
@@ -23,16 +24,17 @@ AS $function$
 declare
   l_result text := '';
 begin
+  l_result := l_result || '## '||(alocation->>'toc')||e'\n\n';
   if aroutines is not null then
-    l_result := l_result || '1. ['||(alocation->>'routines')||'](#routines)'||e'\n';
+    l_result := l_result || '1. ### ['||(alocation->>'routines')||'](#routines)'||e'\n';
     l_result := l_result || gendoc.md_series_toc(aroutines, 'routine_name')||e'\n';
   end if;
   if atables is not null then
-    l_result := l_result || '2. ['||(alocation->>'tables')||'](#tables)'||e'\n';
+    l_result := l_result || '2. ### ['||(alocation->>'tables')||'](#tables)'||e'\n';
     l_result := l_result || gendoc.md_series_toc(atables, 'table_name')||e'\n';
   end if;
   if aviews is not null then
-    l_result := l_result || '3. ['||(alocation->>'views')||'](#views)'||e'\n';
+    l_result := l_result || '3. ### ['||(alocation->>'views')||'](#views)'||e'\n';
     l_result := l_result || gendoc.md_series_toc(aviews, 'view_name')||e'\n';
   end if;
   --
