@@ -1,6 +1,8 @@
 --DROP FUNCTION gendoc.get_tables(aschema name, ainclude character varying[], aexclude character varying[]);
 
-CREATE OR REPLACE FUNCTION gendoc.get_tables(aschema name, ainclude character varying[] DEFAULT NULL::character varying[], aexclude character varying[] DEFAULT NULL::character varying[])
+CREATE OR REPLACE FUNCTION gendoc.get_tables(
+  aschema name, ainclude character varying[] DEFAULT NULL::character varying[], 
+  aexclude character varying[] DEFAULT NULL::character varying[])
  RETURNS jsonb
  LANGUAGE plpgsql
 AS $function$
@@ -23,7 +25,7 @@ begin
              'schema_name', n.nspname, 'table_name', c.relname, 'description', d.description, 
              'kind', case c.relkind when 'f'::char then 'foreign' when 'r'::char then 'ordinary' when 'p'::char then 'partitioned' end,
              'owner', pg_catalog.pg_get_userbyid(c.relowner), 
-             'columns', cls.columns
+             'columns', cls.columns, 'doc_data', gendoc.jsdoc_parse(description)
            )
            order by n.nspname, c.relname) as tables
     from pg_class c
@@ -34,7 +36,8 @@ begin
                         jsonb_build_object(
                           'column_no', column_no, 'column_name', column_name, 'data_type', data_type, 'nullable', nullable, 
                           'default_value', default_value, 'storage_type', storage_type, 
-                          'description', description, 'foreign_key', foreign_key, 'primary_key', primary_key
+                          'description', description, 'foreign_key', foreign_key, 'primary_key', primary_key,
+                          'doc_data', gendoc.jsdoc_parse(description)
                         )
                         order by column_no
                       ) as columns

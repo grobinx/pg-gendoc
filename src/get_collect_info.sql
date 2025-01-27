@@ -29,10 +29,7 @@ begin
   version := gendoc.get_package_version(aschema);
   --
   if 'routines' = any (l_o_objects) or coalesce(array_length(l_o_objects, 1), 0) = 0 then
-    routines := gendoc.get_routines(
-      aschema, 
-      (select array_agg(x::text) from jsonb_array_elements_text(l_o_routines->'include') x), 
-      (select array_agg(x::text) from jsonb_array_elements_text(l_o_routines->'exclude') x));
+    routines := gendoc.get_routines(aschema, aoptions);
   end if;
   --
   if 'tables' = any (l_o_objects) or coalesce(array_length(l_o_objects, 1), 0) = 0 then
@@ -49,7 +46,7 @@ begin
       (select array_agg(x::text) from jsonb_array_elements_text(l_o_views->'exclude') x));
   end if;
   --
-  schema := gendoc.get_schema(aschema);
+  schema := gendoc.get_schema(aschema, aoptions);
   --
   return next;
 end;

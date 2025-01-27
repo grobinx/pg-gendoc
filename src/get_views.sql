@@ -23,7 +23,7 @@ begin
              'schema_name', n.nspname, 'view_name', c.relname, 'description', d.description, 
              'kind', case c.relkind when 'v'::char then 'view' when 'm'::char then 'materialized' end,
              'owner', pg_catalog.pg_get_userbyid(c.relowner), 
-             'columns', cls.columns
+             'columns', cls.columns, 'doc_data', gendoc.jsdoc_parse(description)
            )
            order by n.nspname, c.relname
          ) as tables
@@ -34,7 +34,7 @@ begin
               (select jsonb_agg(
                         jsonb_build_object(
                           'column_no', column_no, 'column_name', column_name, 'data_type', data_type, 'storage_type', storage_type, 
-                          'description', description
+                          'description', description, 'doc_data', gendoc.jsdoc_parse(description)
                         )
                         order by column_no
                       ) as columns

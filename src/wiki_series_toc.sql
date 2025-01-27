@@ -20,7 +20,10 @@ AS $function$
  * @since 2.0
  */
 begin
-  return string_agg('## [[#'||(j->>aname)||'|<code>'||(j->>aname)||'</code>]]'||coalesce(' '||(j->>'description'), ''), e'\n')
+  return string_agg(
+           '## [[#'||(j->>aname)||'|<code>'||(j->>aname)||'</code>]]'||
+           coalesce(' '||coalesce((j->'doc_data'->>'summary'), (j->>'description')), ''), 
+         e'\n')
     from jsonb_array_elements(aitems) j;
 end;
 $function$;

@@ -21,7 +21,8 @@ AS $function$
  */
 begin
   return string_agg(line, e'\n')
-    from (select '  '||(row_number() over ())||'. [`'||(j->>aname)||'`](#'||(j->>aname)||')'||coalesce(' '||(j->>'description'), '') line
+    from (select e'\t'||(row_number() over ())||'. [`'||(j->>aname)||'`](#'||(j->>aname)||')'||
+                 coalesce(' '||trim(coalesce((j->'doc_data'->>'summary'), (j->>'description'))), '') line
             from jsonb_array_elements(aitems) j) l;
 end;
 $function$;

@@ -23,13 +23,31 @@ begin
       "routines": "Routines",
       "tables": "Tables",
       "views": "Views",
-      "toc": "Table of content"
+      "toc": "Table of content",
+      "table_columns": "Table columns",
+      "column_no_th": "No",
+      "column_name_th": "Name",
+      "data_type_th": "Data type",
+      "default_value_th": "Default value",
+      "nullable_th": "Null",
+      "primary_key_th": "PK",
+      "foreign_key_th": "FK",
+      "description_th": "Description"
     },
     "pl": {
       "routines": "Funkcje i procedury",
       "tables": "Tabele",
       "views": "Widoki",
-      "toc": "Spis treści"
+      "toc": "Spis treści",
+      "table_columns": "Kolumny tabeli",
+      "column_no_th": "Lp",
+      "column_name_th": "Nazwa",
+      "data_type_th": "Typ danych",
+      "default_value_th": "Wartość domyślna",
+      "nullable_th": "Null",
+      "primary_key_th": "PK",
+      "foreign_key_th": "FK",
+      "description_th": "Opis"
     }
   }$$)::jsonb;
   --
