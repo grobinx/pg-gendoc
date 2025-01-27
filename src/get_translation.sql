@@ -32,7 +32,22 @@ begin
       "nullable_th": "Null",
       "primary_key_th": "PK",
       "foreign_key_th": "FK",
-      "description_th": "Description"
+      "description_th": "Description",
+      "author": "Author",
+      "version": "Version",
+      "since": "Since",
+      "created": "Created",
+      "package": "Package",
+      "module": "Module",
+      "private": "Private",
+      "public": "Public",
+      "readonly": "Read only",
+      "alias": "Alias",
+      "deprecated": "Deprecated",
+      "function": "Function",
+      "variation": "Variation",
+      "test": "Test",
+      "summary": "Summary"
     },
     "pl": {
       "routines": "Funkcje i procedury",
@@ -47,7 +62,22 @@ begin
       "nullable_th": "Null",
       "primary_key_th": "PK",
       "foreign_key_th": "FK",
-      "description_th": "Opis"
+      "description_th": "Opis",
+      "author": "Autor",
+      "version": "Wersja",
+      "since": "Dostępna od",
+      "created": "Utworzono",
+      "package": "Pakiet",
+      "module": "Moduł",
+      "private": "Prywatne",
+      "public": "Publiczne",
+      "readonly": "Tylko do odczytu",
+      "alias": "Alias",
+      "deprecated": "Wycofana",
+      "function": "Funkcja",
+      "variation": "Wariant",
+      "test": "Test",
+      "summary": "Podsumowanie"
     }
   }$$)::jsonb;
   --

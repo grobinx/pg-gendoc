@@ -33,10 +33,7 @@ begin
   end if;
   --
   if 'tables' = any (l_o_objects) or coalesce(array_length(l_o_objects, 1), 0) = 0 then
-    tables := gendoc.get_tables(
-      aschema, 
-      (select array_agg(x::text) from jsonb_array_elements_text(l_o_tables->'include') x), 
-      (select array_agg(x::text) from jsonb_array_elements_text(l_o_tables->'exclude') x));
+    tables := gendoc.get_tables(aschema, aoptions);
   end if;
   --
   if 'views' = any (l_o_objects) or coalesce(array_length(l_o_objects, 1), 0) = 0 then

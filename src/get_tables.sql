@@ -1,8 +1,6 @@
---DROP FUNCTION gendoc.get_tables(aschema name, ainclude character varying[], aexclude character varying[]);
+--DROP FUNCTION gendoc.get_tables(aschema name, aoptions jsonb);
 
-CREATE OR REPLACE FUNCTION gendoc.get_tables(
-  aschema name, ainclude character varying[] DEFAULT NULL::character varying[], 
-  aexclude character varying[] DEFAULT NULL::character varying[])
+CREATE OR REPLACE FUNCTION gendoc.get_tables(aschema name, aoptions jsonb)
  RETURNS jsonb
  LANGUAGE plpgsql
 AS $function$
@@ -13,31 +11,44 @@ AS $function$
  * @param {varchar[]} ainclude include tables
  * @param {varchar[]} aexclude exclude tables
  * @returns {jsonb}
+ *
+ * @property {varchar[]} aoptions.tables.include include routines or null if all
+ * @property {varchar[]} aoptions.tables.exclude exclude routines or null if all
+ * @property {varchar[]} aoptions.package package names or null if all and if aoptions.parse.routine_body set to true
+ * @property {varchar[]} aoptions.module module names or null if all and if aoptions.parse.routine_body set to true
  * 
  * @author Andrzej Kałuża
  * @created 2025-01-24
  * @version 1.0
  * @since 2.0
  */
+declare
+  l_include varchar[] := array_agg(x) from jsonb_array_elements_text(aoptions->'tables'->'include') x;
+  l_exclude varchar[] := array_agg(x) from jsonb_array_elements_text(aoptions->'tables'->'exclude') x;
+  l_package varchar[] := array_agg(x) from jsonb_array_elements_text(aoptions->'package') x;
+  l_module varchar[] := array_agg(x) from jsonb_array_elements_text(aoptions->'module') x;
+  l_table_comment boolean := coalesce((aoptions->'parse'->'table_comment')::boolean, true);
+  l_column_comment boolean := coalesce((aoptions->'parse'->'table_column_comment')::boolean, false);
 begin
   return jsonb_agg(
            jsonb_build_object(
-             'schema_name', n.nspname, 'table_name', c.relname, 'description', d.description, 
+             'schema_name', c.nspname, 'table_name', c.relname, 'description', c.description, 
              'kind', case c.relkind when 'f'::char then 'foreign' when 'r'::char then 'ordinary' when 'p'::char then 'partitioned' end,
-             'owner', pg_catalog.pg_get_userbyid(c.relowner), 
-             'columns', cls.columns, 'doc_data', gendoc.jsdoc_parse(description)
+             'columns', cls.columns, 'doc_data', doc_data
            )
-           order by n.nspname, c.relname) as tables
-    from pg_class c
-         left join pg_namespace n on n.oid = c.relnamespace
-         left join pg_description d on d.classoid = 'pg_class'::regclass and d.objoid = c.oid and d.objsubid = 0
+           order by c.nspname, c.relname) as tables
+    from (select c.oid, n.nspname, c.relname, c.relkind, d.description,
+                 case when l_table_comment then gendoc.jsdoc_parse(d.description) end doc_data
+            from pg_class c
+                 left join pg_namespace n on n.oid = c.relnamespace
+                 left join pg_description d on d.classoid = 'pg_class'::regclass and d.objoid = c.oid and d.objsubid = 0) c
          join lateral 
               (select jsonb_agg(
                         jsonb_build_object(
                           'column_no', column_no, 'column_name', column_name, 'data_type', data_type, 'nullable', nullable, 
                           'default_value', default_value, 'storage_type', storage_type, 
                           'description', description, 'foreign_key', foreign_key, 'primary_key', primary_key,
-                          'doc_data', gendoc.jsdoc_parse(description)
+                          'doc_data', case when l_column_comment then gendoc.jsdoc_parse(description) end
                         )
                         order by column_no
                       ) as columns
@@ -63,11 +74,13 @@ begin
                         where att.attnum > 0
                           and cl.oid = c.oid) cols) cls on true
    where c.relkind in ('r'::char, 'f'::char, 'p'::char)
-     and n.nspname = aschema
-     and (ainclude is null or c.relname = any (ainclude))
-     and (aexclude is null or c.relname <> all (aexclude));
+     and c.nspname = aschema
+     and (l_include is null or c.relname = any (l_include))
+     and (l_exclude is null or c.relname <> all (l_exclude))
+     and (l_package is null or c.doc_data is null or c.doc_data->>'package' = any (l_package))
+     and (l_module is null or c.doc_data is null or c.doc_data->>'module' = any (l_module));
 end;
 $function$;
 
-ALTER FUNCTION gendoc.get_tables(aschema name, ainclude character varying[], aexclude character varying[]) OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.get_tables(aschema name, ainclude character varying[], aexclude character varying[]) IS 'Create jsonb with all usable information about tables on schemat';
+ALTER FUNCTION gendoc.get_tables(aschema name, aoptions jsonb) OWNER TO gendoc;
+COMMENT ON FUNCTION gendoc.get_tables(aschema name, aoptions jsonb) IS 'Create jsonb with all usable information about tables on schemat';

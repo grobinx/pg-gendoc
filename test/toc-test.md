@@ -1,6 +1,6 @@
 ## Spis treści
 
-1. ### [Funkcje i procedury](#routines)
+1. [Funkcje i procedury](#Funkcje i procedury)
 	1. [`_catch_exception`](#_catch_exception)
 	2. [`_create_cron_line`](#_create_cron_line)
 	3. [`_get_ctrl`](#_get_ctrl)
@@ -17,9 +17,9 @@
 	14. [`_sys_crontab`](#_sys_crontab) Set crontab content
 	15. [`_sys_crontab_l`](#_sys_crontab_l) Get crontab content
 	16. [`_w_cron_id_seq`](#_w_cron_id_seq) Set unique id
-	17. [`active`](#active)
-	18. [`add`](#add)
-	19. [`change`](#change)
+	17. [`active`](#active) Aktywacja zadania
+	18. [`add`](#add) Dodaje nowe zadanie do crona.
+	19. [`change`](#change) Zmiana polecenia
 	20. [`clear_log`](#clear_log)
 	21. [`frequence`](#frequence)
 	22. [`isexists`](#isexists)
@@ -28,24 +28,32 @@
 	25. [`run`](#run)
 	26. [`run`](#run)
 	27. [`version`](#version)
-2. ### [Tabele](#tables)
+	28. [`web_active`](#web_active)
+	29. [`web_add`](#web_add)
+	30. [`web_change`](#web_change)
+	31. [`web_frequence`](#web_frequence)
+	32. [`web_json_list`](#web_json_list)
+	33. [`web_json_list_get`](#web_json_list_get)
+	34. [`web_json_log_list`](#web_json_log_list)
+	35. [`web_json_log_list_get`](#web_json_log_list_get)
+	36. [`web_list`](#web_list)
+	37. [`web_log_list`](#web_log_list)
+	38. [`web_remove`](#web_remove)
+2. [Tabele](#Tabele)
 	1. [`ctrl`](#ctrl) Wartości parametrów konfiguracji
 	2. [`log`](#log) Tabela z logiem
-3. ### [Widoki](#views)
+3. [Widoki](#Widoki)
 	1. [`_crontab_l`](#_crontab_l)
 	2. [`pg_list`](#pg_list) Lista aktualnych zadań
 
-<a name="tables"></a>
+
 
 ## Tabele
-
-<a name="ctrl"></a>
 
 ### ctrl
 
 Tablica ctrl zawiera wartości parametrów konfiguracji mechanizmu CRON po stronie bazy danych.
 Takie jak użytkownik i hasło. Tabela ctrl jest dostępna tylko dla użytkownika CRON.
-@summary Wartości parametrów konfiguracji
 
 Kolumny tabeli
 
@@ -54,13 +62,10 @@ Kolumny tabeli
 |1|name|name||true|true|false|Nazwa parametru|
 |2|value|text||false|false|false|Wartość parametru|
 
-<a name="log"></a>
-
 ### log
 
 Tablica logująca zawiera informacje o czasie wykonania, godzinie rozpoczęcia oraz godzinie zakończenia, informacje czy zadanie zakończyło się sukcesem oraz jeśli zadanie zakończyło się wyjątkiem – jego treść.
-Rekord do tablicy dodawany jest w chwili rozpoczęcia zadania. Gdy zadanie się zakończy uaktualniana jest tylko informacja o czasie jego zakończenia. 
-@summary Tabela z logiem
+Rekord do tablicy dodawany jest w chwili rozpoczęcia zadania. Gdy zadanie się zakończy uaktualniana jest tylko informacja o czasie jego zakończenia.
 
 Kolumny tabeli
 
