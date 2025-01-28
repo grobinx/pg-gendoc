@@ -10,14 +10,14 @@ as $fn$
  * Function remove comment characters from string.
  * 
  * @author cmtdoc parser (https://github.com/grobinx/cmtdoc-parser)
- * @created Mon Jan 27 2025 22:55:56 GMT+0100 (czas środkowoeuropejski standardowy)
- * @version 1.1.10
+ * @created Tue Jan 28 2025 15:56:07 GMT+0100 (czas środkowoeuropejski standardowy)
+ * @version 1.1.12
  * 
  * @param {varchar|text} str string to parse
  * @returns {jsonb}
  * @example
  * select p.proname, jsdoc_parse(p.doc) as doc, p.arguments, p.description
- *   from (select p.proname, substring(pg_get_functiondef(p.oid) from '\/\*\*.*\*\/') as doc, 
+ *   from (select p.proname, substring(p.prosrc from '\/\*\*.*\*\/') as doc, 
  *                coalesce(pg_get_function_arguments(p.oid), '') arguments,
  *                d.description
  *           from pg_proc p
@@ -52,7 +52,7 @@ begin
     union all
     -- @property|prop [{type}] name|[name=value] [description]
     select 'property' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
-      from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from coalesce(trim(e' \t\n\r' from r[7]), trim(e' \t\n\r' from r[11]))) as "name", trim(e' \t\n\r' from r[9]) as "default", trim(e' \t\n\r' from r[13]) as "description", string_to_array(trim(e' \t\n\r' from trim(e' \t\n\r' from r[3])), '|') as "types"
+      from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from coalesce(trim(e' \t\n\r' from r[7]), trim(e' \t\n\r' from r[11]))) as "name", trim(e' \t\n\r' from r[9]) as "default", trim(e' \t\n\r' from r[13]) as "description", string_to_array(trim(e' \t\n\r' from trim(e' \t\n\r' from r[3])), '|') as "types", string_to_array(trim(e' \t\n\r' from trim(e' \t\n\r' from coalesce(r[7], r[11]))), '.') as "names"
               from regexp_matches(str, '@(property|prop)[[:>:]](\s*{([^{]*)?})?((\s*\[(([^\[\=]+)\s*(\=\s*([^\[]*)?)?)?\])|(\s+([^\s@)<{}]+)))(\s*([^@]*)?)?', 'g') r) r
      where 'property' = any (l_figures)
     having jsonb_agg(row_to_json(r)::jsonb) is not null
@@ -269,6 +269,13 @@ begin
       from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from r[5]) as "name", trim(e' \t\n\r' from r[7]) as "description"
               from regexp_matches(str, '@(table)(\s*{([^{]*)?})?(\s+([^\s@)<{}]+))(\s*([^@]*)?)?', 'g') r) r
      where 'table' = any (l_figures)
+    having jsonb_agg(row_to_json(r)::jsonb) is not null
+    union all
+    -- @view {type} name [description]
+    select 'view' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
+      from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from r[5]) as "name", trim(e' \t\n\r' from r[7]) as "description"
+              from regexp_matches(str, '@(view)(\s*{([^{]*)?})?(\s+([^\s@)<{}]+))(\s*([^@]*)?)?', 'g') r) r
+     where 'view' = any (l_figures)
     having jsonb_agg(row_to_json(r)::jsonb) is not null
     union all
     -- @sequence|generator name [description]
