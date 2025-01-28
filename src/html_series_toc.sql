@@ -23,7 +23,7 @@ begin
   return '<ol>'||string_agg(
            '<li><a href="#'||(j->>aname)||'"><code>'||(j->>aname)||'</code></a>'||
            coalesce('<span>'||coalesce((j->'doc_data'->>'summary'), (j->>'description'))||'</span>', '')||'</li>', 
-         '')||'</ol>'
+         '' order by j->>aname)||'</ol>'
     from jsonb_array_elements(aitems) j;
 end;
 $function$;

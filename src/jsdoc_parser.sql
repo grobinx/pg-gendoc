@@ -10,7 +10,7 @@ as $fn$
  * Function remove comment characters from string.
  * 
  * @author cmtdoc parser (https://github.com/grobinx/cmtdoc-parser)
- * @created Tue Jan 28 2025 15:56:07 GMT+0100 (czas środkowoeuropejski standardowy)
+ * @created Tue Jan 28 2025 21:59:39 GMT+0100 (czas środkowoeuropejski standardowy)
  * @version 1.1.12
  * 
  * @param {varchar|text} str string to parse
@@ -47,14 +47,14 @@ begin
     select 'param' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
       from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from coalesce(trim(e' \t\n\r' from r[7]), trim(e' \t\n\r' from r[11]))) as "name", trim(e' \t\n\r' from r[9]) as "default", trim(e' \t\n\r' from r[13]) as "description", string_to_array(trim(e' \t\n\r' from trim(e' \t\n\r' from r[3])), '|') as "types"
               from regexp_matches(str, '@(param|arg|argument)(\s*{([^{]*)?})?((\s*\[(([^\[\=]+)\s*(\=\s*([^\[]*)?)?)?\])|(\s+([^\s@)<{}]+)))(\s*([^@]*)?)?', 'g') r) r
-     where 'param' = any (l_figures)
+     where array['param', 'arg', 'argument'] && l_figures
     having jsonb_agg(row_to_json(r)::jsonb) is not null
     union all
     -- @property|prop [{type}] name|[name=value] [description]
     select 'property' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
       from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from coalesce(trim(e' \t\n\r' from r[7]), trim(e' \t\n\r' from r[11]))) as "name", trim(e' \t\n\r' from r[9]) as "default", trim(e' \t\n\r' from r[13]) as "description", string_to_array(trim(e' \t\n\r' from trim(e' \t\n\r' from r[3])), '|') as "types", string_to_array(trim(e' \t\n\r' from trim(e' \t\n\r' from coalesce(r[7], r[11]))), '.') as "names"
               from regexp_matches(str, '@(property|prop)[[:>:]](\s*{([^{]*)?})?((\s*\[(([^\[\=]+)\s*(\=\s*([^\[]*)?)?)?\])|(\s+([^\s@)<{}]+)))(\s*([^@]*)?)?', 'g') r) r
-     where 'property' = any (l_figures)
+     where array['property', 'prop'] && l_figures
     having jsonb_agg(row_to_json(r)::jsonb) is not null
     union all
     -- @ignore
@@ -100,7 +100,7 @@ begin
     select 'constant' as figure, row_to_json(r)::jsonb as object
       from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from r[5]) as "name"
               from regexp_matches(str, '@(constant|const)(\s*{([^{]*)?})(\s+([^\s@)<{}]+))?') r) r
-     where 'constant' = any (l_figures)
+     where array['constatnt', 'const'] && l_figures
     union all
     -- @copyright some copyright text
     select 'copyright' as figure, to_jsonb(trim(e' \t\n\r' from r[3])) as object
@@ -120,7 +120,7 @@ begin
     -- @description|desc|classdesc some description
     select 'description' as figure, to_jsonb(array_agg(r[3])) as object
       from regexp_matches(str, '@(description|desc|classdesc)[[:>:]](\s*([^@]*)?)', 'g') r
-     where 'description' = any (l_figures)
+     where array['description', 'desc', 'classdesc'] && l_figures
     having array_agg(r[3]) is not null
     union all
     -- @enum {type} [name]
@@ -137,12 +137,12 @@ begin
     -- @function|func|method name
     select 'function' as figure, to_jsonb(trim(e' \t\n\r' from r[3])) as object
       from regexp_matches(str, '@(function|func|method)[[:>:]](\s+([^\s@)<{}]+))') r
-     where 'function' = any (l_figures)
+     where array['function', 'func', 'method'] && l_figures
     union all
     -- @function|func|method
     select 'function' as figure, to_jsonb(true) as object
       from regexp_matches(str, '@(function|func|method)[[:>:]]\s*(\n|$)') r
-     where 'function' = any (l_figures)
+     where array['function', 'func', 'method'] && l_figures
     union all
     -- @created date
     select 'created' as figure, to_jsonb(trim(e' \t\n\r' from r[3])) as object
@@ -158,7 +158,7 @@ begin
     select 'variable' as figure, row_to_json(r)::jsonb as object
       from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from r[5]) as "name"
               from regexp_matches(str, '@(var|variable|member)[[:>:]](\s*{([^{]*)?})(\s+([^\s@)<{}]+))?') r) r
-     where 'variable' = any (l_figures)
+     where array['member', 'var', 'variable'] && l_figures
     union all
     -- @module
     select 'module' as figure, to_jsonb(true) as object
@@ -185,7 +185,7 @@ begin
     select 'returns' as figure, row_to_json(r)::jsonb as object
       from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from r[5]) as "description", string_to_array(trim(e' \t\n\r' from trim(e' \t\n\r' from r[3])), '|') as "types"
               from regexp_matches(str, '@(returns|return)[[:>:]](\s*{([^{]*)?})(\s*([^@]*)?)?') r) r
-     where 'returns' = any (l_figures)
+     where array['return', 'returns'] && l_figures
     union all
     -- @see {@link namepath}|namepath [description]
     select 'see' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
@@ -208,7 +208,7 @@ begin
     select 'throws' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
       from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from r[5]) as "description"
               from regexp_matches(str, '@(throws|exception)(\s*{([^{]*)?})?(\s*([^@]*)?)?', 'g') r) r
-     where 'throws' = any (l_figures)
+     where array['throws', 'exception'] && l_figures
     having jsonb_agg(row_to_json(r)::jsonb) is not null
     union all
     -- @todo text describing thing to do.
@@ -237,13 +237,13 @@ begin
     select 'yield' as figure, row_to_json(r)::jsonb as object
       from (select trim(e' \t\n\r' from r[3]) as "type", trim(e' \t\n\r' from r[5]) as "description"
               from regexp_matches(str, '@(yield|yields|next)[[:>:]](\s*{([^{]*)?})?(\s*([^@]*)?)?') r) r
-     where 'yield' = any (l_figures)
+     where array['yield', 'yields', 'next'] && l_figures
     union all
     -- @change|changed|changelog|modified [date] [<author>] [description]
     select 'change' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
       from (select trim(e' \t\n\r' from r[3]) as "date", trim(e' \t\n\r' from r[5]) as "author", trim(e' \t\n\r' from r[7]) as "description"
               from regexp_matches(str, '@(change|changed|changelog|modified)[[:>:]](\s+([^\s@)<{}]+))?(\s*<([^<]*)>)?(\s*([^@]*)?)?', 'g') r) r
-     where 'change' = any (l_figures)
+     where array['change', 'changed', 'changelog', 'modified'] && l_figures
     having jsonb_agg(row_to_json(r)::jsonb) is not null
     union all
     -- @isue some description
@@ -282,7 +282,7 @@ begin
     select 'sequence' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
       from (select trim(e' \t\n\r' from r[3]) as "name", trim(e' \t\n\r' from r[5]) as "description"
               from regexp_matches(str, '@(sequence|generator)(\s+([^\s@)<{}]+))(\s*([^@]*)?)?', 'g') r) r
-     where 'sequence' = any (l_figures)
+     where array['sequence', 'generator'] && l_figures
     having jsonb_agg(row_to_json(r)::jsonb) is not null) r;
 end;
 $fn$;

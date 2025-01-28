@@ -49,7 +49,19 @@ begin
       "test": "Test",
       "summary": "Summary",
       "propeties": "Properties",
-      "name_th": "Name"
+      "name_th": "Name",
+      "requires": "Requires",
+      "see": "See",
+      "todo": "To do",
+      "tutorial": "Tutorial",
+      "isue": "Known problem",
+      "columns": "Columns",
+      "arguments": "Arguments",
+      "mode_th": "Mode",
+      "argument_no_th": "No",
+      "argument_name_th": "Name",
+      "returns": "Returns",
+      "data_type": "Data type"
     },
     "pl": {
       "routines": "Funkcje i procedury",
@@ -81,7 +93,19 @@ begin
       "test": "Test",
       "summary": "Podsumowanie",
       "propeties": "Właściwości",
-      "name_th": "Nazwa"
+      "name_th": "Nazwa",
+      "requires": "Wymagane",
+      "see": "Zobacz też",
+      "todo": "Do zrobienia",
+      "tutorial": "Poradnik",
+      "isue": "Znane problemy",
+      "columns": "Kolumny",
+      "arguments": "Argumenty",
+      "mode_th": "Tryb",
+      "argument_no_th": "Lp",
+      "argument_name_th": "Nazwa",
+      "returns": "Zwraca",
+      "data_type": "Typ danych"
     }
   }$$)::jsonb;
   --
