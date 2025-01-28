@@ -24,7 +24,7 @@ AS $function$
 declare
   l_result text := '';
 begin
-  l_result := l_result || '<section id="toc"><header>'||(alocation->>'toc')||'</header>';
+  l_result := l_result || '<section id="toc"><h2>'||(alocation->>'toc')||'</h2>';
   l_result := l_result || '<ol>';
   if aroutines is not null then
     l_result := l_result || '<li><a href="#routines" />'||(alocation->>'routines')||'</a>';

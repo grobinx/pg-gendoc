@@ -50,7 +50,11 @@ begin
             from pg_proc p
                  join pg_namespace n on n.oid = p.pronamespace
                  join pg_language l on l.oid = p.prolang
-                 left join pg_description d on d.classoid = 'pg_proc'::regclass and d.objoid = p.oid and d.objsubid = 0) p
+                 left join pg_description d on d.classoid = 'pg_proc'::regclass and d.objoid = p.oid and d.objsubid = 0
+           where p.prokind in ('f', 'p') 
+             and n.nspname = aschema
+             and (l_include is null or p.proname = any (l_include))
+             and (l_exclude is null or p.proname <> all (l_exclude))) p
          join lateral (
            select jsonb_agg(
                     jsonb_build_object(
@@ -63,12 +67,8 @@ begin
                      from (select f.oid, pg_catalog.generate_series(1, f.pronargs::int) n, f.*
                              from pg_catalog.pg_proc f
                             where f.oid = p.oid) f) r) a on true
-   where p.prokind in ('f', 'p') 
-     and p.nspname = aschema
-     and (l_include is null or p.proname = any (l_include))
-     and (l_exclude is null or p.proname <> all (l_exclude))
-     and (l_package is null or p.doc_data is null or p.doc_data->>'package' = any (l_package))
-     and (l_module is null or p.doc_data is null or p.doc_data->>'module' = any (l_module));
+   where (l_package is null or p.doc_data->>'package' is null or p.doc_data->>'package' = any (l_package))
+     and (l_module is null or p.doc_data->>'module' is null or p.doc_data->>'module' = any (l_module));
 end;
 $function$;
 

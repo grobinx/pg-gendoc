@@ -8,14 +8,15 @@ AS $function$
  * Create jsonb with all usable information about tables on schema
  * 
  * @param {name} aschema schema name
- * @param {varchar[]} ainclude include tables
- * @param {varchar[]} aexclude exclude tables
+ * @param {jsonb} aoptions options
  * @returns {jsonb}
  *
- * @property {varchar[]} aoptions.tables.include include routines or null if all
- * @property {varchar[]} aoptions.tables.exclude exclude routines or null if all
- * @property {varchar[]} aoptions.package package names or null if all and if aoptions.parse.routine_body set to true
- * @property {varchar[]} aoptions.module module names or null if all and if aoptions.parse.routine_body set to true
+ * @property {varchar[]} aoptions.tables.include include tables or null if all
+ * @property {varchar[]} aoptions.tables.exclude exclude tables or null if all
+ * @property {varchar[]} aoptions.package package names or null if all 
+ * @property {varchar[]} aoptions.module module names or null if all 
+ * @property {boolean} [aoptions.parse.table_comment=true] parse doc table comment
+ * @property {boolean} [aoptions.parse.table_column_comment=false] parse doc table column comment
  * 
  * @author Andrzej Kałuża
  * @created 2025-01-24
@@ -40,8 +41,12 @@ begin
     from (select c.oid, n.nspname, c.relname, c.relkind, d.description,
                  case when l_table_comment then gendoc.jsdoc_parse(d.description) end doc_data
             from pg_class c
-                 left join pg_namespace n on n.oid = c.relnamespace
-                 left join pg_description d on d.classoid = 'pg_class'::regclass and d.objoid = c.oid and d.objsubid = 0) c
+                 join pg_namespace n on n.oid = c.relnamespace
+                 left join pg_description d on d.classoid = 'pg_class'::regclass and d.objoid = c.oid and d.objsubid = 0
+           where c.relkind in ('r'::char, 'f'::char, 'p'::char)
+             and n.nspname = aschema
+             and (l_include is null or c.relname = any (l_include))
+             and (l_exclude is null or c.relname <> all (l_exclude))) c
          join lateral 
               (select jsonb_agg(
                         jsonb_build_object(
@@ -73,12 +78,8 @@ begin
                               left outer join pg_description des on des.classoid = 'pg_class'::regclass and des.objoid = att.attrelid and des.objsubid = att.attnum
                         where att.attnum > 0
                           and cl.oid = c.oid) cols) cls on true
-   where c.relkind in ('r'::char, 'f'::char, 'p'::char)
-     and c.nspname = aschema
-     and (l_include is null or c.relname = any (l_include))
-     and (l_exclude is null or c.relname <> all (l_exclude))
-     and (l_package is null or c.doc_data is null or c.doc_data->>'package' = any (l_package))
-     and (l_module is null or c.doc_data is null or c.doc_data->>'module' = any (l_module));
+   where (l_package is null or c.doc_data->>'package' is null or c.doc_data->>'package' = any (l_package))
+     and (l_module is null or c.doc_data->>'module' is null or c.doc_data->>'module' = any (l_module));
 end;
 $function$;
 

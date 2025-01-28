@@ -47,7 +47,9 @@ begin
       "function": "Function",
       "variation": "Variation",
       "test": "Test",
-      "summary": "Summary"
+      "summary": "Summary",
+      "propeties": "Properties",
+      "name_th": "Name"
     },
     "pl": {
       "routines": "Funkcje i procedury",
@@ -77,7 +79,9 @@ begin
       "function": "Funkcja",
       "variation": "Wariant",
       "test": "Test",
-      "summary": "Podsumowanie"
+      "summary": "Podsumowanie",
+      "propeties": "Właściwości",
+      "name_th": "Nazwa"
     }
   }$$)::jsonb;
   --

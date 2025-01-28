@@ -1,61 +1,35 @@
 <section id="toc">
-    <header>Spis treści</header>
+    <h2>Spis treści</h2>
     <ol>
         <li><a href="#routines" />Funkcje i procedury</a>
             <ol>
-                <li><a href="#_catch_exception"><code>_catch_exception</code></a></li>
-                <li><a href="#_create_cron_line"><code>_create_cron_line</code></a></li>
-                <li><a href="#_get_ctrl"><code>_get_ctrl</code></a></li>
-                <li><a href="#_get_psql_opt"><code>_get_psql_opt</code></a></li>
-                <li><a href="#_get_psql_opt"><code>_get_psql_opt</code></a></li>
-                <li><a href="#_keylock"><code>_keylock</code></a></li>
-                <li><a href="#_list"><code>_list</code></a></li>
-                <li><a href="#_parse_cron_line"><code>_parse_cron_line</code></a></li>
-                <li><a href="#_prepare_command"><code>_prepare_command</code></a></li>
-                <li><a href="#_r_cron_id_seq"><code>_r_cron_id_seq</code></a><span>Get unique id</span></li>
-                <li><a href="#_run"><code>_run</code></a><span>Run console command</span></li>
-                <li><a href="#_start"><code>_start</code></a></li>
-                <li><a href="#_stop"><code>_stop</code></a></li>
-                <li><a href="#_sys_crontab"><code>_sys_crontab</code></a><span>Set crontab content</span></li>
-                <li><a href="#_sys_crontab_l"><code>_sys_crontab_l</code></a><span>Get crontab content</span></li>
-                <li><a href="#_w_cron_id_seq"><code>_w_cron_id_seq</code></a><span>Set unique id</span></li>
-                <li><a href="#active"><code>active</code></a><span>Aktywacja zadania</span></li>
-                <li><a href="#add"><code>add</code></a><span>Dodaje nowe zadanie do crona.</span></li>
-                <li><a href="#change"><code>change</code></a><span>Zmiana polecenia</span></li>
-                <li><a href="#clear_log"><code>clear_log</code></a></li>
-                <li><a href="#frequence"><code>frequence</code></a></li>
-                <li><a href="#isexists"><code>isexists</code></a></li>
-                <li><a href="#pg_list"><code>pg_list</code></a></li>
-                <li><a href="#remove"><code>remove</code></a></li>
-                <li><a href="#run"><code>run</code></a></li>
-                <li><a href="#run"><code>run</code></a></li>
+                <li><a href="#_clear_content"><code>_clear_content</code></a></li>
+                <li><a href="#_get_content"><code>_get_content</code></a></li>
+                <li><a href="#_set_cgi_envs"><code>_set_cgi_envs</code></a></li>
+                <li><a href="#current_page"><code>current_page</code></a></li>
+                <li><a href="#get_cgi_env"><code>get_cgi_env</code></a></li>
+                <li><a href="#index"><code>index</code></a></li>
+                <li><a href="#p"><code>p</code></a></li>
+                <li><a href="#redirect_url"><code>redirect_url</code></a></li>
+                <li><a href="#set_content_type"><code>set_content_type</code></a></li>
+                <li><a href="#set_user_data"><code>set_user_data</code></a></li>
                 <li><a href="#version"><code>version</code></a></li>
             </ol>
         </li>
         <li><a href="#tables" />Tabele</a>
             <ol>
-                <li><a href="#ctrl"><code>ctrl</code></a><span>Parametry konfiguracji</span></li>
-                <li><a href="#log"><code>log</code></a><span>Tabela z logiem</span></li>
-            </ol>
-        </li>
-        <li><a href="#views" />Widoki</a>
-            <ol>
-                <li><a href="#_crontab_l"><code>_crontab_l</code></a></li>
-                <li><a href="#pg_list"><code>pg_list</code></a><span>Lista aktualnych zadań</span></li>
+                <li><a href="#cgi_envs"><code>cgi_envs</code></a><span>server sessions cgi environments</span></li>
+                <li><a href="#responses"><code>responses</code></a><span>pages content</span></li>
             </ol>
         </li>
     </ol>
 </section>
 <section id="tables">
-    <header>Tabele</header>
-    <section class="table"><a name="ctrl"></a>
-        <header>ctrl (ordinary)</header>
-        <p class="description">Tablica ctrl zawiera wartości parametrów konfiguracji mechanizmu CRON po stronie bazy
-            danych.<br />Takie jak użytkownik i hasło. Tabela ctrl jest dostępna tylko dla użytkownika CRON.</p>
-        <dl>
-            <dt>Podsumowanie</dt>
-            <dd>Parametry konfiguracji</dd>
-        </dl>
+    <h2>Tabele</h2>
+    <section class="table"><a name="cgi_envs"></a>
+        <h3>cgi_envs (ordinary)</h3>
+        <p class="description">server sessions cgi environments</p>
+        <dl></dl>
         <table>
             <caption>Kolumny tabeli</caption>
             <thead>
@@ -73,37 +47,91 @@
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>name</td>
-                    <td>name</td>
+                    <td>session_id</td>
+                    <td>character varying</td>
                     <td></td>
                     <td>true</td>
                     <td>true</td>
                     <td>false</td>
-                    <td>Nazwa parametru</td>
+                    <td>server session id</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>value</td>
-                    <td>text</td>
+                    <td>pid</td>
+                    <td>integer</td>
+                    <td></td>
+                    <td>true</td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>database pid</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>created</td>
+                    <td>timestamp without time zone</td>
+                    <td>now()</td>
+                    <td>true</td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>timestamp of row creation</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>updated</td>
+                    <td>timestamp without time zone</td>
+                    <td>now()</td>
+                    <td>true</td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>timestamp of row modyfication</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>values</td>
+                    <td>jsonb</td>
+                    <td></td>
+                    <td>true</td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>cgi values</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>redirect_url</td>
+                    <td>character varying</td>
                     <td></td>
                     <td>false</td>
                     <td>false</td>
                     <td>false</td>
-                    <td>Wartość parametru</td>
+                    <td>redirect url as response</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>content_type</td>
+                    <td>character varying</td>
+                    <td></td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>page content type</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>user_data</td>
+                    <td>json</td>
+                    <td></td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td>false</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
     </section>
-    <section class="table"><a name="log"></a>
-        <header>log (ordinary)</header>
-        <p class="description">Tablica logująca zawiera informacje o czasie wykonania, godzinie rozpoczęcia oraz
-            godzinie zakończenia, informacje czy zadanie zakończyło się sukcesem oraz jeśli zadanie zakończyło się
-            wyjątkiem – jego treść.<br />Rekord do tablicy dodawany jest w chwili rozpoczęcia zadania. Gdy zadanie się
-            zakończy uaktualniana jest tylko informacja o czasie jego zakończenia.</p>
-        <dl>
-            <dt>Podsumowanie</dt>
-            <dd>Tabela z logiem</dd>
-        </dl>
+    <section class="table"><a name="responses"></a>
+        <h3>responses (ordinary)</h3>
+        <p class="description">pages content</p>
+        <dl></dl>
         <table>
             <caption>Kolumny tabeli</caption>
             <thead>
@@ -121,123 +149,33 @@
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>ilog</td>
-                    <td>bigserial</td>
-                    <td>nextval('cron.log_ilog_seq'::regclass)</td>
+                    <td>pid</td>
+                    <td>integer</td>
+                    <td></td>
                     <td>true</td>
                     <td>true</td>
                     <td>false</td>
-                    <td>Identyfikator rekordu</td>
+                    <td>database pid</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>start</td>
-                    <td>timestamp without time zone</td>
+                    <td>sequence</td>
+                    <td>integer</td>
                     <td></td>
+                    <td>true</td>
+                    <td>true</td>
                     <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Data i godzina rozpoczęcia zadania</td>
+                    <td>content sequence (call p function)</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>stop</td>
-                    <td>timestamp without time zone</td>
-                    <td></td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Data i godzina zakończenia zadania</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>minute</td>
+                    <td>content</td>
                     <td>character varying</td>
                     <td></td>
                     <td>false</td>
                     <td>false</td>
                     <td>false</td>
-                    <td>Wartość kolumny minute z crona</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>hour</td>
-                    <td>character varying</td>
                     <td></td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Wartość kolumny hour z crona</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>dayofmonth</td>
-                    <td>character varying</td>
-                    <td></td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Wartość kolumny dayofmonth z crona</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>month</td>
-                    <td>character varying</td>
-                    <td></td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Wartość kolumny month z crona</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>dayofweek</td>
-                    <td>character varying</td>
-                    <td></td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Wartość kolumny dayofweek z crona</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>command</td>
-                    <td>text</td>
-                    <td></td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Wykonywana komenda SQL</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>jobid</td>
-                    <td>numeric</td>
-                    <td></td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Wartość parametru abrokenflag</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>success</td>
-                    <td>boolean</td>
-                    <td>true</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Czy zadanie zakończyło się sukcesem</td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td>exception</td>
-                    <td>text</td>
-                    <td></td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>Treść wyjątku jeśli nastąpi</td>
                 </tr>
             </tbody>
         </table>

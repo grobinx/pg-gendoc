@@ -7,18 +7,23 @@ AS $function$
 /**
  * Collects complete information about objects and returns it in the form of a record
  *
+ * @summary Collect info
+ *
  * @param {name} aschema schema name
  * @param {jsonb} aoptions options to generate documentation
  * @returns {record} schema, version, routines, tables, views
  * 
- * @property {string[]} objects.objects objects that are to appear in the documentation (routines, tables, views)
- * @property {string[]} rotuines|tables|views.include include name list 
- * @property {string[]} rotuines|tables|views.exclude exclude name list 
+ * @property {string[]} aoptions.objects objects that are to appear in the documentation (routines, tables, views)
  *
  * @author Andrzej Kałuża
  * @created 2025-01-26
  * @version 1.0
  * @since 2.0
+ * 
+ * @see get_routines
+ * @see get_tables
+ * @see get_views
+ * @see get_schema
  */
 declare
   l_o_objects text[] := (select array_agg(x::text) from jsonb_array_elements_text(aoptions -> 'objects') x);
@@ -37,10 +42,7 @@ begin
   end if;
   --
   if 'views' = any (l_o_objects) or coalesce(array_length(l_o_objects, 1), 0) = 0 then
-    views := gendoc.get_views(
-      aschema, 
-      (select array_agg(x::text) from jsonb_array_elements_text(l_o_views->'include') x), 
-      (select array_agg(x::text) from jsonb_array_elements_text(l_o_views->'exclude') x));
+    views := gendoc.get_views(aschema, aoptions);
   end if;
   --
   schema := gendoc.get_schema(aschema, aoptions);
