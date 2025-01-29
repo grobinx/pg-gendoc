@@ -10,7 +10,7 @@ as $fn$
  * Function remove comment characters from string.
  * 
  * @author cmtdoc parser (https://github.com/grobinx/cmtdoc-parser)
- * @created Tue Jan 28 2025 21:59:39 GMT+0100 (czas środkowoeuropejski standardowy)
+ * @created Wed Jan 29 2025 17:35:52 GMT+0100 (czas środkowoeuropejski standardowy)
  * @version 1.1.12
  * 
  * @param {varchar|text} str string to parse
@@ -134,6 +134,12 @@ begin
       from regexp_matches(str, '@(enum)[[:>:]]\s*(\n|$)') r
      where 'enum' = any (l_figures)
     union all
+    -- @example multiline example, code, comments, etc
+    select 'example' as figure, to_jsonb(array_agg(r[2])) as object
+      from regexp_matches(str, '@(example)(\s*([^@]*)?)', 'g') r
+     where 'example' = any (l_figures)
+    having array_agg(r[2]) is not null
+    union all
     -- @function|func|method name
     select 'function' as figure, to_jsonb(trim(e' \t\n\r' from r[3])) as object
       from regexp_matches(str, '@(function|func|method)[[:>:]](\s+([^\s@)<{}]+))') r
@@ -239,7 +245,7 @@ begin
               from regexp_matches(str, '@(yield|yields|next)[[:>:]](\s*{([^{]*)?})?(\s*([^@]*)?)?') r) r
      where array['yield', 'yields', 'next'] && l_figures
     union all
-    -- @change|changed|changelog|modified [date] [<author>] [description]
+    -- @change|changed|changelog|modified [date|version] [<author>] [description]
     select 'change' as figure, jsonb_agg(row_to_json(r)::jsonb) as object
       from (select trim(e' \t\n\r' from r[3]) as "date", trim(e' \t\n\r' from r[5]) as "author", trim(e' \t\n\r' from r[7]) as "description"
               from regexp_matches(str, '@(change|changed|changelog|modified)[[:>:]](\s+([^\s@)<{}]+))?(\s*<([^<]*)>)?(\s*([^@]*)?)?', 'g') r) r

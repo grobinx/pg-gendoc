@@ -64,7 +64,9 @@ begin
       "data_type": "Data type",
       "opt_sup": "opt",
       "schema": "Schema",
-      "changes": "Changes"
+      "changes": "Changes",
+      "example": "Example",
+      "view_columns": "View columns"
     },
     "pl": {
       "routines": "Funkcje i procedury",
@@ -111,7 +113,9 @@ begin
       "data_type": "Typ danych",
       "opt_sup": "opc",
       "schema": "Schemat",
-      "changes": "Zmiany"
+      "changes": "Zmiany",
+      "example": "Przykład",
+      "view_columns": "Kolumny widoku"
     }
   }$$)::jsonb;
   --
