@@ -20,10 +20,11 @@ AS $function$
  * @since 2.0
  */
 begin
-  return string_agg(line, e'\n' order by j->>aname)
-    from (select e'\t'||(row_number() over ())||'. [`'||(j->>aname)||'`](#'||(j->>aname)||')'||
+  return string_agg(line, e'\n')
+    from (select e'\t'||(row_number() over (order by j->>aname))||'. [`'||(j->>aname)||'`](#'||(j->>aname)||')'||
                  coalesce(' '||trim(coalesce((j->'doc_data'->>'summary'), (j->>'description'))), '') line
-            from jsonb_array_elements(aitems) j) l;
+            from jsonb_array_elements(aitems) j
+           order by j->>aname) l;
 end;
 $function$;
 

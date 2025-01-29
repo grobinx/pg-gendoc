@@ -61,7 +61,10 @@ begin
       "argument_no_th": "No",
       "argument_name_th": "Name",
       "returns": "Returns",
-      "data_type": "Data type"
+      "data_type": "Data type",
+      "opt_sup": "opt",
+      "schema": "Schema",
+      "changes": "Changes"
     },
     "pl": {
       "routines": "Funkcje i procedury",
@@ -105,7 +108,10 @@ begin
       "argument_no_th": "Lp",
       "argument_name_th": "Nazwa",
       "returns": "Zwraca",
-      "data_type": "Typ danych"
+      "data_type": "Typ danych",
+      "opt_sup": "opc",
+      "schema": "Schemat",
+      "changes": "Zmiany"
     }
   }$$)::jsonb;
   --

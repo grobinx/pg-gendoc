@@ -21,7 +21,7 @@ AS $function$
  */
 begin
   return string_agg(
-           '## [[#'||(j->>aname)||'|<code>'||(j->>aname)||'</code>]]'||
+           '## [[#'||(j->>aname)||'|'||(j->>aname)||']]'||
            coalesce(' '||coalesce((j->'doc_data'->>'summary'), (j->>'description')), ''), 
          e'\n' order by j->>aname)
     from jsonb_array_elements(aitems) j;

@@ -33,14 +33,15 @@ begin
            jsonb_build_object(
              'schema_name', p.nspname, 'routine_name', p.proname,
              'kind', case p.prokind when 'f'::char then 'function' when 'p'::char then 'procedure' end,
-             'returns', pg_get_function_result(p.oid), 'arguments', a.arguments,
+             'returns', pg_get_function_result(p.oid), 'returns_type', pg_catalog.format_type(p.prorettype, null),
+             'arguments', coalesce(a.arguments, '[]'),
              'description', p.description, 'doc_data', p.doc_data,
              'identity_name', p.proname||'('||coalesce(pg_get_function_identity_arguments(p.oid), '')||')',
              'language', p.lanname
            )
            order by p.nspname, p.proname
          )
-    from (select p.oid, n.nspname, p.proname, p.prokind, d.description, l.lanname,
+    from (select p.oid, n.nspname, p.proname, p.prokind, p.prorettype, d.description, l.lanname,
                  case 
                    when l_parse_body then 
                      case when l.lanname = 'plpgsql' then gendoc.jsdoc_parse(substring(p.prosrc from '\/\*\*.*\*\/'))
@@ -58,10 +59,10 @@ begin
          join lateral (
            select jsonb_agg(
                     jsonb_build_object(
-                      'routine_no', r.routine_no, 'routine_name', r.routine_name, 'data_type', r.data_type, 'mode', r.mode, 'default_value', r.default_value
+                      'argument_no', r.argument_no, 'argument_name', r.argument_name, 'data_type', r.data_type, 'mode', r.mode, 'default_value', r.default_value
                     )
                   ) arguments
-             from (select n as routine_no, f.proargnames[n] as routine_name, pg_catalog.format_type(f.proargtypes[n -1], -1) as data_type,
+             from (select n as argument_no, f.proargnames[n] as argument_name, pg_catalog.format_type(f.proargtypes[n -1], -1) as data_type,
                           case f.proargmodes[n] when 'o' then 'out' when 'b' then 'in/out' else 'in' end as mode,
                           trim((regexp_split_to_array(pg_get_expr(f.proargdefaults, 0), '[\t,](?=(?:[^\'']|\''[^\'']*\'')*$)'))[case when f.pronargs -n > f.pronargdefaults then null else f.pronargdefaults -(f.pronargs -n +1) +1 end]) default_value
                      from (select f.oid, pg_catalog.generate_series(1, f.pronargs::int) n, f.*
