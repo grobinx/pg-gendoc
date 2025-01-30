@@ -3,10 +3,10 @@
 1. [Funkcje i procedury](#Funkcje i procedury)
     1. [`get_collect_info`](#get_collect_info) Collect info
     2. [`get_package_version`](#get_package_version) get package version
-	3. [`get_routine_doc`](#get_routine_doc) parse one routine doc
-	4. [`get_routines`](#get_routines) collect usable information
-	5. [`get_schema`](#get_schema) Create jsonb with all usable information about schema
-	6. [`get_tables`](#get_tables) collect information about tables
+    3. [`get_routine_doc`](#get_routine_doc) parse one routine doc
+    4. [`get_routines`](#get_routines) collect usable information
+    5. [`get_schema`](#get_schema) Create jsonb with all usable information about schema
+    6. [`get_tables`](#get_tables) collect information about tables
 	7. [`get_translation`](#get_translation) The function includes language translations
 	8. [`get_views`](#get_views) collect information about views
 	9. [`html`](#html) generate html document
