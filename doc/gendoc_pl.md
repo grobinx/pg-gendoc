@@ -1,8 +1,8 @@
 # Schemat "gendoc" - Wersja 2.0.0<small>&nbsp;	2025-01-30 20:54:36</small>## Spis treści
 
 1. [Funkcje i procedury](#Funkcje i procedury)
-	1. [`get_collect_info`](#get_collect_info) Collect info
-	2. [`get_package_version`](#get_package_version) get package version
+    1. [`get_collect_info`](#get_collect_info) Collect info
+    2. [`get_package_version`](#get_package_version) get package version
 	3. [`get_routine_doc`](#get_routine_doc) parse one routine doc
 	4. [`get_routines`](#get_routines) collect usable information
 	5. [`get_schema`](#get_schema) Create jsonb with all usable information about schema
