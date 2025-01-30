@@ -8,11 +8,9 @@ AS $function$
 /**
  * Create table of content for all series
  *
- * @summary toc for all objects
- *
  * Level 1
  *
- * @summary toc level 1
+ * @summary toc for all objects
  * 
  * @param {jsonb} aroutines routines series
  * @param {jsonb} atables tables series

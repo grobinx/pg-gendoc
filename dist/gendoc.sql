@@ -5,7 +5,7 @@
 -- Dumped from database version 15.10 (Debian 15.10-0+deb12u1)
 -- Dumped by pg_dump version 17.0
 
--- Started on 2025-01-30 20:40:45
+-- Started on 2025-01-30 20:55:18
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -155,7 +155,7 @@ $$;
 
 
 --
--- TOC entry 416 (class 1255 OID 27547)
+-- TOC entry 415 (class 1255 OID 27547)
 -- Name: get_routines(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -507,7 +507,7 @@ COMMENT ON FUNCTION gendoc.get_translation(alocation character varying) IS 'The 
 
 
 --
--- TOC entry 418 (class 1255 OID 27594)
+-- TOC entry 417 (class 1255 OID 27594)
 -- Name: get_views(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -589,7 +589,7 @@ $$;
 
 
 --
--- TOC entry 406 (class 1255 OID 27517)
+-- TOC entry 405 (class 1255 OID 27517)
 -- Name: html(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -668,9 +668,9 @@ CREATE FUNCTION gendoc.html_create_toc(aroutines jsonb, atables jsonb, aviews js
 /**
  * Create table of content for all series
  *
- * @summary toc for all objects
- *
  * Level 1
+ *
+ * @summary toc for all objects
  * 
  * @param {jsonb} aroutines routines series
  * @param {jsonb} atables tables series
@@ -820,7 +820,7 @@ $$;
 
 
 --
--- TOC entry 405 (class 1255 OID 27591)
+-- TOC entry 404 (class 1255 OID 27591)
 -- Name: html_doc_data_uni(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -972,7 +972,7 @@ $_$;
 
 
 --
--- TOC entry 403 (class 1255 OID 27599)
+-- TOC entry 402 (class 1255 OID 27599)
 -- Name: html_routine(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1084,7 +1084,7 @@ $$;
 
 
 --
--- TOC entry 417 (class 1255 OID 27638)
+-- TOC entry 416 (class 1255 OID 27638)
 -- Name: html_schema(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1129,7 +1129,7 @@ $$;
 
 
 --
--- TOC entry 408 (class 1255 OID 27518)
+-- TOC entry 407 (class 1255 OID 27518)
 -- Name: html_series_toc(jsonb, character varying); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1140,6 +1140,8 @@ CREATE FUNCTION gendoc.html_series_toc(aitems jsonb, aname character varying) RE
  * Create table of content from jsonb array as HTML code
  *
  * Level 2
+ *
+ * @summary toc level 2
  * 
  * @param {jsonb} aitems array with elements
  * @param {varchar} aname item name to show
@@ -1162,7 +1164,7 @@ $$;
 
 --
 -- TOC entry 3557 (class 0 OID 0)
--- Dependencies: 408
+-- Dependencies: 407
 -- Name: FUNCTION html_series_toc(aitems jsonb, aname character varying); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -1276,7 +1278,7 @@ COMMENT ON FUNCTION gendoc.html_tables(atables jsonb, alocation jsonb) IS 'Creat
 
 
 --
--- TOC entry 407 (class 1255 OID 27628)
+-- TOC entry 406 (class 1255 OID 27628)
 -- Name: html_view(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1338,7 +1340,7 @@ $$;
 
 
 --
--- TOC entry 404 (class 1255 OID 27627)
+-- TOC entry 403 (class 1255 OID 27627)
 -- Name: html_views(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1509,6 +1511,8 @@ CREATE FUNCTION gendoc.jsdoc_parse(str character varying) RETURNS jsonb
 /**
  * Function parse jsdoc and returns jsonb structure<br />
  * Function remove comment characters from string.
+ * 
+ * @summary parse jsdoc
  * 
  * @author cmtdoc parser (https://github.com/grobinx/cmtdoc-parser)
  * @created Wed Jan 29 2025 17:25:24 GMT+0100 (czas środkowoeuropejski standardowy)
@@ -1856,7 +1860,7 @@ $$;
 
 
 --
--- TOC entry 402 (class 1255 OID 27527)
+-- TOC entry 418 (class 1255 OID 27527)
 -- Name: md_create_toc(jsonb, jsonb, jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1867,6 +1871,8 @@ CREATE FUNCTION gendoc.md_create_toc(aroutines jsonb, atables jsonb, aviews json
  * Create table of content for all series
  *
  * Level 1
+ *
+ * @summary toc for all objects
  * 
  * @param {jsonb} aroutines routines series
  * @param {jsonb} atables tables series
@@ -1882,9 +1888,9 @@ CREATE FUNCTION gendoc.md_create_toc(aroutines jsonb, atables jsonb, aviews json
 declare
   l_result text := '';
 begin
-  l_result := l_result || e'\n\n## '||(alocation->>'toc')||e'\n\n';
+  l_result := l_result || '## '||(alocation->>'toc')||e'\n\n';
   if aroutines is not null then
-    l_result := l_result || '1. ['||(alocation->>'routines')||'](#'||replace(alocation->>'routines', ' ', '-')||')'||e'\n';
+    l_result := l_result || '1. ['||(alocation->>'routines')||'](#'||(alocation->>'routines')||')'||e'\n';
     l_result := l_result || gendoc.md_series_toc(aroutines, 'routine_name')||e'\n';
   end if;
   if atables is not null then
@@ -1903,7 +1909,7 @@ $$;
 
 --
 -- TOC entry 3562 (class 0 OID 0)
--- Dependencies: 402
+-- Dependencies: 418
 -- Name: FUNCTION md_create_toc(aroutines jsonb, atables jsonb, aviews jsonb, alocation jsonb); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -1911,7 +1917,7 @@ COMMENT ON FUNCTION gendoc.md_create_toc(aroutines jsonb, atables jsonb, aviews 
 
 
 --
--- TOC entry 410 (class 1255 OID 27636)
+-- TOC entry 409 (class 1255 OID 27636)
 -- Name: md_doc_data_param(jsonb, jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1958,7 +1964,7 @@ $$;
 
 
 --
--- TOC entry 411 (class 1255 OID 27637)
+-- TOC entry 410 (class 1255 OID 27637)
 -- Name: md_doc_data_prop(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2001,7 +2007,7 @@ $$;
 
 
 --
--- TOC entry 412 (class 1255 OID 27632)
+-- TOC entry 411 (class 1255 OID 27632)
 -- Name: md_doc_data_uni(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2200,7 +2206,7 @@ $$;
 
 
 --
--- TOC entry 413 (class 1255 OID 27634)
+-- TOC entry 412 (class 1255 OID 27634)
 -- Name: md_routines(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2284,6 +2290,8 @@ CREATE FUNCTION gendoc.md_series_toc(aitems jsonb, aname character varying) RETU
  * Create table of content from jsonb array as MarkDown code
  *
  * Level 2
+ *
+ * @summary toc level 2
  * 
  * @param {jsonb} aitems array with elements
  * @param {varchar} aname item name to show
@@ -2314,7 +2322,7 @@ COMMENT ON FUNCTION gendoc.md_series_toc(aitems jsonb, aname character varying) 
 
 
 --
--- TOC entry 414 (class 1255 OID 27629)
+-- TOC entry 413 (class 1255 OID 27629)
 -- Name: md_table(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2400,7 +2408,7 @@ $$;
 
 
 --
--- TOC entry 415 (class 1255 OID 27631)
+-- TOC entry 414 (class 1255 OID 27631)
 -- Name: md_view(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2451,7 +2459,7 @@ $$;
 
 
 --
--- TOC entry 409 (class 1255 OID 27630)
+-- TOC entry 408 (class 1255 OID 27630)
 -- Name: md_views(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2548,6 +2556,8 @@ CREATE FUNCTION gendoc.wiki_create_toc(aroutines jsonb, atables jsonb, aviews js
  * Create table of content for all series
  *
  * Level 1
+ *
+ * @summary toc for all objects
  * 
  * @param {jsonb} aroutines routines series
  * @param {jsonb} atables tables series
@@ -2603,6 +2613,8 @@ CREATE FUNCTION gendoc.wiki_series_toc(aitems jsonb, aname character varying) RE
  * Create table of content from jsonb array as Wiki markup code
  *
  * Level 2
+ *
+ * @summary toc level 2
  * 
  * @param {jsonb} aitems array with elements
  * @param {varchar} aname item name to show
@@ -2683,7 +2695,7 @@ end;
 $$;
 
 
--- Completed on 2025-01-30 20:40:50
+-- Completed on 2025-01-30 20:55:23
 
 --
 -- PostgreSQL database dump complete
