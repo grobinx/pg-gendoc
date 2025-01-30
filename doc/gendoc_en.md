@@ -1,4 +1,6 @@
-# Schema "gendoc" - Version 2.0.0<small>&nbsp;	2025-01-30 20:58:39</small>## Table of content
+# Schema "gendoc" - Version 2.0.0<small>&nbsp;	2025-01-30 21:00:24</small>
+
+## Table of content
 
 1. [Routines](#Routines)
     1. [`get_collect_info`](#get_collect_info) Collect info

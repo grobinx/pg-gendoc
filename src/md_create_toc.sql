@@ -26,7 +26,7 @@ AS $function$
 declare
   l_result text := '';
 begin
-  l_result := l_result || '## '||(alocation->>'toc')||e'\n\n';
+  l_result := l_result || e'\n\n## '||(alocation->>'toc')||e'\n\n';
   if aroutines is not null then
     l_result := l_result || '1. ['||(alocation->>'routines')||'](#'||(alocation->>'routines')||')'||e'\n';
     l_result := l_result || gendoc.md_series_toc(aroutines, 'routine_name')||e'\n';
