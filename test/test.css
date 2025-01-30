@@ -46,6 +46,14 @@ body {
         margin-top: 0;
         margin-bottom: 1rem;
     }
+    .alert {
+        background-color: #fef9e7;
+        margin: 0.25rem;
+        padding: 0.5rem;
+        border: 1px solid;
+        border-color: lightgray;
+        border-radius: 4px;
+    }
     #toc {
         a {
             text-underline-offset: .2rem;
@@ -57,7 +65,7 @@ body {
             font-size: 110%;
         }
     }
-    #routines, #tables, #views {
+    #schema, #routines, #tables, #views {
         > section {
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
@@ -68,7 +76,6 @@ body {
                 font-size: 110%;
                 display: block;
                 margin-bottom: 0.5rem;
-                background-color: #f8f9f9;
                 padding: 0.25rem;
                 sup {
                     font-size: 80%;
@@ -79,8 +86,13 @@ body {
                     color: gray;
                 }
                 pre {
+                    background-color: #f8f9f9;
                     margin: 0;
                     font-size: 90%;
+                    border: 1px solid;
+                    border-color: lightgray;
+                    border-radius: 4px;
+                    padding: 1em;
                 }
             }
 
