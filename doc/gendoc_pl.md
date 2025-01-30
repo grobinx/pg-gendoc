@@ -1,8 +1,6 @@
-# Schemat "gendoc" - Wersja 2.0.0<small>&nbsp;	2025-01-30 20:39:17</small>
+# Schemat "gendoc" - Wersja 2.0.0<small>&nbsp;	2025-01-30 20:49:01</small>## Spis treści
 
-## Spis treści
-
-1. [Funkcje i procedury](#Funkcje-i-procedury)
+1. [Funkcje i procedury](#Funkcje i procedury)
 	1. [`get_collect_info`](#get_collect_info) Collect info
 	2. [`get_package_version`](#get_package_version) get package version
 	3. [`get_routine_doc`](#get_routine_doc) parse one routine doc
@@ -21,9 +19,7 @@ Level 1
 	14. [`html_routine`](#html_routine) Create one routine html section
 	15. [`html_routines`](#html_routines) Create routines html section
 	16. [`html_schema`](#html_schema) Create schema html section
-	17. [`html_series_toc`](#html_series_toc) Create table of content from jsonb array as HTML code
-
-Level 2
+	17. [`html_series_toc`](#html_series_toc) toc level 2
 	18. [`html_table`](#html_table) Create one table html section
 	19. [`html_tables`](#html_tables) Create tables html section
 	20. [`html_view`](#html_view) Create one view html section
@@ -34,28 +30,22 @@ Level 2
 	25. [`jsdoc_parse`](#jsdoc_parse) Function parse jsdoc and returns jsonb structure<br />
 Function remove comment characters from string.
 	26. [`markdown`](#markdown) generate md document
-	27. [`md_create_toc`](#md_create_toc) Create table of content for all series
-Level 1
+	27. [`md_create_toc`](#md_create_toc) toc level 1
 	28. [`md_doc_data_param`](#md_doc_data_param) Creates a collection of information from doc_data about parameters
 	29. [`md_doc_data_prop`](#md_doc_data_prop) Creates a collection of information from doc_data about properties
 	30. [`md_doc_data_uni`](#md_doc_data_uni) Creates a collection of information from doc_data
 	31. [`md_routine`](#md_routine) Create one routine markdown section
 	32. [`md_routines`](#md_routines) Create routines markdown section
 	33. [`md_schema`](#md_schema) Create schema markdown section
-	34. [`md_series_toc`](#md_series_toc) Create table of content from jsonb array as MarkDown code
-
-Level 2
+	34. [`md_series_toc`](#md_series_toc) toc level 2
 	35. [`md_table`](#md_table) Create one table markdown section
 	36. [`md_tables`](#md_tables) Create tables markdown section
 	37. [`md_view`](#md_view) Create one view markdown section
 	38. [`md_views`](#md_views) Create views markdown section
 	39. [`version`](#version) Version of this package
 	40. [`wiki`](#wiki)
-	41. [`wiki_create_toc`](#wiki_create_toc) Create table of content for all series
-Level 1
-	42. [`wiki_series_toc`](#wiki_series_toc) Create table of content from jsonb array as Wiki markup code
-
-Level 2
+	41. [`wiki_create_toc`](#wiki_create_toc) toc level 1
+	42. [`wiki_series_toc`](#wiki_series_toc) toc level 2
 	43. [`wiki_tables`](#wiki_tables) Create tables wiki section
 
 
@@ -668,6 +658,10 @@ Level 2
 >
 > **Utworzono** 2025-01-26
 
+#### Podsumowanie
+
+toc level 2
+
 #### Zwraca
 
 
@@ -971,6 +965,8 @@ generate md document
 
 Create table of content for all series
 
+
+
 Level 1
 
 #### Argumenty
@@ -990,6 +986,10 @@ Level 1
 > **Dostępna od** 2.0
 >
 > **Utworzono** 2025-01-26
+
+#### Podsumowanie
+
+toc level 1
 
 #### Zwraca
 
@@ -1208,6 +1208,10 @@ Level 2
 >
 > **Utworzono** 2025-01-26
 
+#### Podsumowanie
+
+toc level 2
+
 #### Zwraca
 
 
@@ -1382,6 +1386,8 @@ major.minor.release
 
 Create table of content for all series
 
+
+
 Level 1
 
 #### Argumenty
@@ -1401,6 +1407,10 @@ Level 1
 > **Dostępna od** 2.0
 >
 > **Utworzono** 2025-01-26
+
+#### Podsumowanie
+
+toc level 1
 
 #### Zwraca
 
@@ -1435,6 +1445,10 @@ Level 2
 > **Dostępna od** 2.0
 >
 > **Utworzono** 2025-01-26
+
+#### Podsumowanie
+
+toc level 2
 
 #### Zwraca
 

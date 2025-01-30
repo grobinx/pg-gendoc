@@ -9,6 +9,8 @@ AS $function$
  * Create table of content for all series
  *
  * Level 1
+ *
+ * @summary toc level 1
  * 
  * @param {jsonb} aroutines routines series
  * @param {jsonb} atables tables series

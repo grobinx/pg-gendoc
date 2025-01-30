@@ -9,6 +9,8 @@ AS $function$
  * Create table of content from jsonb array as Wiki markup code
  *
  * Level 2
+ *
+ * @summary toc level 2
  * 
  * @param {jsonb} aitems array with elements
  * @param {varchar} aname item name to show
