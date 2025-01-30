@@ -23,7 +23,7 @@ AS $function$
  */
 begin
   return string_agg(line, e'\n')
-    from (select e'\t'||(row_number() over (order by j->>aname))||'. [`'||(j->>aname)||'`](#'||(j->>aname)||')'||
+    from (select '    '||(row_number() over (order by j->>aname))||'. [`'||(j->>aname)||'`](#'||(j->>aname)||')'||
                  coalesce(' '||trim(coalesce((j->'doc_data'->>'summary'), (j->'doc_data'->>'root'), (j->>'description'))), '') line
             from jsonb_array_elements(aitems) j
            order by j->>aname) l;
