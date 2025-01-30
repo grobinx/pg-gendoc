@@ -5,7 +5,7 @@
 -- Dumped from database version 15.10 (Debian 15.10-0+deb12u1)
 -- Dumped by pg_dump version 17.0
 
--- Started on 2025-01-30 20:55:18
+-- Started on 2025-01-30 22:49:41
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -28,7 +28,7 @@ CREATE SCHEMA gendoc;
 
 
 --
--- TOC entry 391 (class 1255 OID 27516)
+-- TOC entry 389 (class 1255 OID 27516)
 -- Name: get_collect_info(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -84,8 +84,8 @@ $$;
 
 
 --
--- TOC entry 3554 (class 0 OID 0)
--- Dependencies: 391
+-- TOC entry 3550 (class 0 OID 0)
+-- Dependencies: 389
 -- Name: FUNCTION get_collect_info(aschema name, aoptions jsonb); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -123,7 +123,7 @@ $$;
 
 
 --
--- TOC entry 368 (class 1255 OID 27494)
+-- TOC entry 367 (class 1255 OID 27494)
 -- Name: get_routine_doc(name, text); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -155,7 +155,7 @@ $$;
 
 
 --
--- TOC entry 415 (class 1255 OID 27547)
+-- TOC entry 411 (class 1255 OID 27547)
 -- Name: get_routines(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -235,7 +235,7 @@ $_$;
 
 
 --
--- TOC entry 381 (class 1255 OID 27546)
+-- TOC entry 380 (class 1255 OID 27546)
 -- Name: get_schema(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -271,8 +271,8 @@ $$;
 
 
 --
--- TOC entry 3555 (class 0 OID 0)
--- Dependencies: 381
+-- TOC entry 3551 (class 0 OID 0)
+-- Dependencies: 380
 -- Name: FUNCTION get_schema(aschema name, aoptions jsonb); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -280,7 +280,7 @@ COMMENT ON FUNCTION gendoc.get_schema(aschema name, aoptions jsonb) IS 'Create j
 
 
 --
--- TOC entry 400 (class 1255 OID 27552)
+-- TOC entry 397 (class 1255 OID 27552)
 -- Name: get_tables(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -370,7 +370,7 @@ $$;
 
 
 --
--- TOC entry 399 (class 1255 OID 27526)
+-- TOC entry 396 (class 1255 OID 27526)
 -- Name: get_translation(character varying); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -498,8 +498,8 @@ $_$;
 
 
 --
--- TOC entry 3556 (class 0 OID 0)
--- Dependencies: 399
+-- TOC entry 3552 (class 0 OID 0)
+-- Dependencies: 396
 -- Name: FUNCTION get_translation(alocation character varying); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -507,7 +507,7 @@ COMMENT ON FUNCTION gendoc.get_translation(alocation character varying) IS 'The 
 
 
 --
--- TOC entry 417 (class 1255 OID 27594)
+-- TOC entry 413 (class 1255 OID 27594)
 -- Name: get_views(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -589,7 +589,7 @@ $$;
 
 
 --
--- TOC entry 405 (class 1255 OID 27517)
+-- TOC entry 401 (class 1255 OID 27517)
 -- Name: html(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -658,7 +658,7 @@ $$;
 
 
 --
--- TOC entry 324 (class 1255 OID 27523)
+-- TOC entry 323 (class 1255 OID 27523)
 -- Name: html_create_toc(jsonb, jsonb, jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -768,7 +768,7 @@ $$;
 
 
 --
--- TOC entry 397 (class 1255 OID 27592)
+-- TOC entry 394 (class 1255 OID 27592)
 -- Name: html_doc_data_prop(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -820,7 +820,7 @@ $$;
 
 
 --
--- TOC entry 404 (class 1255 OID 27591)
+-- TOC entry 400 (class 1255 OID 27591)
 -- Name: html_doc_data_uni(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -972,7 +972,7 @@ $_$;
 
 
 --
--- TOC entry 402 (class 1255 OID 27599)
+-- TOC entry 398 (class 1255 OID 27599)
 -- Name: html_routine(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1084,7 +1084,7 @@ $$;
 
 
 --
--- TOC entry 416 (class 1255 OID 27638)
+-- TOC entry 412 (class 1255 OID 27638)
 -- Name: html_schema(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1129,7 +1129,7 @@ $$;
 
 
 --
--- TOC entry 407 (class 1255 OID 27518)
+-- TOC entry 403 (class 1255 OID 27518)
 -- Name: html_series_toc(jsonb, character varying); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1163,8 +1163,8 @@ $$;
 
 
 --
--- TOC entry 3557 (class 0 OID 0)
--- Dependencies: 407
+-- TOC entry 3553 (class 0 OID 0)
+-- Dependencies: 403
 -- Name: FUNCTION html_series_toc(aitems jsonb, aname character varying); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -1237,7 +1237,7 @@ $$;
 
 
 --
--- TOC entry 327 (class 1255 OID 27531)
+-- TOC entry 326 (class 1255 OID 27531)
 -- Name: html_tables(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1269,8 +1269,8 @@ $$;
 
 
 --
--- TOC entry 3558 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 3554 (class 0 OID 0)
+-- Dependencies: 326
 -- Name: FUNCTION html_tables(atables jsonb, alocation jsonb); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -1278,7 +1278,7 @@ COMMENT ON FUNCTION gendoc.html_tables(atables jsonb, alocation jsonb) IS 'Creat
 
 
 --
--- TOC entry 406 (class 1255 OID 27628)
+-- TOC entry 402 (class 1255 OID 27628)
 -- Name: html_view(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1340,7 +1340,7 @@ $$;
 
 
 --
--- TOC entry 403 (class 1255 OID 27627)
+-- TOC entry 399 (class 1255 OID 27627)
 -- Name: html_views(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1372,7 +1372,7 @@ $$;
 
 
 --
--- TOC entry 367 (class 1255 OID 27493)
+-- TOC entry 366 (class 1255 OID 27493)
 -- Name: is_private_routine(name, text); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1406,8 +1406,8 @@ $$;
 
 
 --
--- TOC entry 3559 (class 0 OID 0)
--- Dependencies: 367
+-- TOC entry 3555 (class 0 OID 0)
+-- Dependencies: 366
 -- Name: FUNCTION is_private_routine(aschema name, aroutine text); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -1415,7 +1415,7 @@ COMMENT ON FUNCTION gendoc.is_private_routine(aschema name, aroutine text) IS 'C
 
 
 --
--- TOC entry 388 (class 1255 OID 27492)
+-- TOC entry 387 (class 1255 OID 27492)
 -- Name: is_public_routine(name, text); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1449,8 +1449,8 @@ $$;
 
 
 --
--- TOC entry 3560 (class 0 OID 0)
--- Dependencies: 388
+-- TOC entry 3556 (class 0 OID 0)
+-- Dependencies: 387
 -- Name: FUNCTION is_public_routine(aschema name, aroutine text); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -1458,7 +1458,7 @@ COMMENT ON FUNCTION gendoc.is_public_routine(aschema name, aroutine text) IS 'Ch
 
 
 --
--- TOC entry 389 (class 1255 OID 27495)
+-- TOC entry 388 (class 1255 OID 27495)
 -- Name: is_test_routine(name, text); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1492,8 +1492,8 @@ $$;
 
 
 --
--- TOC entry 3561 (class 0 OID 0)
--- Dependencies: 389
+-- TOC entry 3557 (class 0 OID 0)
+-- Dependencies: 388
 -- Name: FUNCTION is_test_routine(aschema name, aroutine text); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -1501,7 +1501,7 @@ COMMENT ON FUNCTION gendoc.is_test_routine(aschema name, aroutine text) IS 'Chec
 
 
 --
--- TOC entry 365 (class 1255 OID 27421)
+-- TOC entry 364 (class 1255 OID 27421)
 -- Name: jsdoc_parse(character varying); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1800,7 +1800,7 @@ $_$;
 
 
 --
--- TOC entry 371 (class 1255 OID 27528)
+-- TOC entry 370 (class 1255 OID 27528)
 -- Name: markdown(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1860,7 +1860,7 @@ $$;
 
 
 --
--- TOC entry 418 (class 1255 OID 27527)
+-- TOC entry 414 (class 1255 OID 27527)
 -- Name: md_create_toc(jsonb, jsonb, jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1888,9 +1888,9 @@ CREATE FUNCTION gendoc.md_create_toc(aroutines jsonb, atables jsonb, aviews json
 declare
   l_result text := '';
 begin
-  l_result := l_result || '## '||(alocation->>'toc')||e'\n\n';
+  l_result := l_result || e'\n\n## '||(alocation->>'toc')||e'\n\n';
   if aroutines is not null then
-    l_result := l_result || '1. ['||(alocation->>'routines')||'](#'||(alocation->>'routines')||')'||e'\n';
+    l_result := l_result || '1. ['||(alocation->>'routines')||'](#'||replace(alocation->>'routines', ' ', '-')||')'||e'\n';
     l_result := l_result || gendoc.md_series_toc(aroutines, 'routine_name')||e'\n';
   end if;
   if atables is not null then
@@ -1908,8 +1908,8 @@ $$;
 
 
 --
--- TOC entry 3562 (class 0 OID 0)
--- Dependencies: 418
+-- TOC entry 3558 (class 0 OID 0)
+-- Dependencies: 414
 -- Name: FUNCTION md_create_toc(aroutines jsonb, atables jsonb, aviews jsonb, alocation jsonb); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
@@ -1917,7 +1917,7 @@ COMMENT ON FUNCTION gendoc.md_create_toc(aroutines jsonb, atables jsonb, aviews 
 
 
 --
--- TOC entry 409 (class 1255 OID 27636)
+-- TOC entry 405 (class 1255 OID 27636)
 -- Name: md_doc_data_param(jsonb, jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -1964,7 +1964,7 @@ $$;
 
 
 --
--- TOC entry 410 (class 1255 OID 27637)
+-- TOC entry 406 (class 1255 OID 27637)
 -- Name: md_doc_data_prop(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2007,7 +2007,7 @@ $$;
 
 
 --
--- TOC entry 411 (class 1255 OID 27632)
+-- TOC entry 407 (class 1255 OID 27632)
 -- Name: md_doc_data_uni(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2137,7 +2137,7 @@ $_$;
 
 
 --
--- TOC entry 372 (class 1255 OID 27635)
+-- TOC entry 371 (class 1255 OID 27635)
 -- Name: md_routine(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2206,7 +2206,7 @@ $$;
 
 
 --
--- TOC entry 412 (class 1255 OID 27634)
+-- TOC entry 408 (class 1255 OID 27634)
 -- Name: md_routines(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2237,7 +2237,7 @@ $$;
 
 
 --
--- TOC entry 376 (class 1255 OID 27651)
+-- TOC entry 375 (class 1255 OID 27651)
 -- Name: md_schema(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2304,7 +2304,7 @@ CREATE FUNCTION gendoc.md_series_toc(aitems jsonb, aname character varying) RETU
  */
 begin
   return string_agg(line, e'\n')
-    from (select e'\t'||(row_number() over (order by j->>aname))||'. [`'||(j->>aname)||'`](#'||(j->>aname)||')'||
+    from (select '    '||(row_number() over (order by j->>aname))||'. [`'||(j->>aname)||'`](#'||(j->>aname)||'-'||(j->>'kind')||')'||
                  coalesce(' '||trim(coalesce((j->'doc_data'->>'summary'), (j->'doc_data'->>'root'), (j->>'description'))), '') line
             from jsonb_array_elements(aitems) j
            order by j->>aname) l;
@@ -2313,7 +2313,7 @@ $$;
 
 
 --
--- TOC entry 3563 (class 0 OID 0)
+-- TOC entry 3559 (class 0 OID 0)
 -- Dependencies: 390
 -- Name: FUNCTION md_series_toc(aitems jsonb, aname character varying); Type: COMMENT; Schema: gendoc; Owner: -
 --
@@ -2322,7 +2322,7 @@ COMMENT ON FUNCTION gendoc.md_series_toc(aitems jsonb, aname character varying) 
 
 
 --
--- TOC entry 413 (class 1255 OID 27629)
+-- TOC entry 409 (class 1255 OID 27629)
 -- Name: md_table(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2377,7 +2377,7 @@ $$;
 
 
 --
--- TOC entry 383 (class 1255 OID 27532)
+-- TOC entry 382 (class 1255 OID 27532)
 -- Name: md_tables(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2408,7 +2408,7 @@ $$;
 
 
 --
--- TOC entry 414 (class 1255 OID 27631)
+-- TOC entry 410 (class 1255 OID 27631)
 -- Name: md_view(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2459,7 +2459,7 @@ $$;
 
 
 --
--- TOC entry 408 (class 1255 OID 27630)
+-- TOC entry 404 (class 1255 OID 27630)
 -- Name: md_views(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2490,7 +2490,7 @@ $$;
 
 
 --
--- TOC entry 366 (class 1255 OID 27433)
+-- TOC entry 365 (class 1255 OID 27433)
 -- Name: version(); Type: FUNCTION; Schema: gendoc; Owner: -
 --
 
@@ -2512,190 +2512,15 @@ $$;
 
 
 --
--- TOC entry 3564 (class 0 OID 0)
--- Dependencies: 366
+-- TOC entry 3560 (class 0 OID 0)
+-- Dependencies: 365
 -- Name: FUNCTION version(); Type: COMMENT; Schema: gendoc; Owner: -
 --
 
 COMMENT ON FUNCTION gendoc.version() IS 'Version of this package';
 
 
---
--- TOC entry 323 (class 1255 OID 27530)
--- Name: wiki(name, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
---
-
-CREATE FUNCTION gendoc.wiki(aschema name, aoptions jsonb DEFAULT NULL::jsonb) RETURNS text
-    LANGUAGE plpgsql
-    AS $$
-declare
-  l_r record;
-  l_translation jsonb := gendoc.get_translation(aoptions->>'location');
-  l_result varchar := '';
-begin
-  select * into l_r
-    from gendoc.get_collect_info(aschema, aoptions);
-  --
-  l_result := l_result || gendoc.wiki_create_toc(l_r.routines, l_r.tables, l_r.views, l_translation);
-  l_result := l_result || gendoc.wiki_tables(l_r.tables, l_translation);
-  --
-  return l_result;
-end;
-$$;
-
-
---
--- TOC entry 393 (class 1255 OID 27529)
--- Name: wiki_create_toc(jsonb, jsonb, jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
---
-
-CREATE FUNCTION gendoc.wiki_create_toc(aroutines jsonb, atables jsonb, aviews jsonb, alocation jsonb) RETURNS text
-    LANGUAGE plpgsql IMMUTABLE
-    AS $$
-/**
- * Create table of content for all series
- *
- * Level 1
- *
- * @summary toc for all objects
- * 
- * @param {jsonb} aroutines routines series
- * @param {jsonb} atables tables series
- * @param {jsonb} aviews views series
- * @param {jsonb} alocation tarnslation strings
- * @returns {text}
- * 
- * @author Andrzej Kałuża
- * @created 2025-01-26
- * @version 1.0
- * @since 2.0
- */
-declare
-  l_result text := '';
-begin
-  l_result := l_result || '== '||(alocation->>'toc')||' =='||e'\n\n';
-  if aroutines is not null then
-    l_result := l_result || '# [[#'||(alocation->>'routines')||'|'||(alocation->>'routines')||e']]\n';
-    l_result := l_result || gendoc.wiki_series_toc(aroutines, 'routine_name')||e'\n';
-  end if;
-  if atables is not null then
-    l_result := l_result || '# [[#'||(alocation->>'tables')||'|'||(alocation->>'tables')||e']]\n';
-    l_result := l_result || gendoc.wiki_series_toc(atables, 'table_name')||e'\n';
-  end if;
-  if aviews is not null then
-    l_result := l_result || '# [[#'||(alocation->>'views')||'|'||(alocation->>'views')||e']]\n';
-    l_result := l_result || gendoc.wiki_series_toc(aviews, 'view_name')||e'\n';
-  end if;
-  --
-  return l_result;
-end;
-$$;
-
-
---
--- TOC entry 3565 (class 0 OID 0)
--- Dependencies: 393
--- Name: FUNCTION wiki_create_toc(aroutines jsonb, atables jsonb, aviews jsonb, alocation jsonb); Type: COMMENT; Schema: gendoc; Owner: -
---
-
-COMMENT ON FUNCTION gendoc.wiki_create_toc(aroutines jsonb, atables jsonb, aviews jsonb, alocation jsonb) IS 'Create table of content for all series';
-
-
---
--- TOC entry 392 (class 1255 OID 27520)
--- Name: wiki_series_toc(jsonb, character varying); Type: FUNCTION; Schema: gendoc; Owner: -
---
-
-CREATE FUNCTION gendoc.wiki_series_toc(aitems jsonb, aname character varying) RETURNS text
-    LANGUAGE plpgsql IMMUTABLE
-    AS $$
-/**
- * Create table of content from jsonb array as Wiki markup code
- *
- * Level 2
- *
- * @summary toc level 2
- * 
- * @param {jsonb} aitems array with elements
- * @param {varchar} aname item name to show
- * @returns {text}
- * 
- * @author Andrzej Kałuża
- * @created 2025-01-26
- * @version 1.0
- * @since 2.0
- */
-begin
-  return string_agg(
-           '## [[#'||(j->>aname)||'|'||(j->>aname)||']]'||
-           coalesce(' '||coalesce((j->'doc_data'->>'summary'), (j->'doc_data'->>'root'), (j->>'description')), ''), 
-         e'\n' order by j->>aname)
-    from jsonb_array_elements(aitems) j;
-end;
-$$;
-
-
---
--- TOC entry 3566 (class 0 OID 0)
--- Dependencies: 392
--- Name: FUNCTION wiki_series_toc(aitems jsonb, aname character varying); Type: COMMENT; Schema: gendoc; Owner: -
---
-
-COMMENT ON FUNCTION gendoc.wiki_series_toc(aitems jsonb, aname character varying) IS 'Create table of content from jsonb array as Wiki markup code';
-
-
---
--- TOC entry 401 (class 1255 OID 27573)
--- Name: wiki_tables(jsonb, jsonb); Type: FUNCTION; Schema: gendoc; Owner: -
---
-
-CREATE FUNCTION gendoc.wiki_tables(atables jsonb, alocation jsonb) RETURNS text
-    LANGUAGE plpgsql IMMUTABLE
-    AS $$
-/**
- * Create tables wiki section
- *
- * @param {jsonb} atables tables series
- * @param {jsonb} alocation tarnslation strings
- * @returns {text}
- * 
- * @author Andrzej Kałuża
- * @created 2025-01-76
- * @version 1.0
- * @since 2.0
- */
-declare
-  l_result text := '';
-begin
-  l_result := l_result || e'\n' || e'\n\n' || '== '||(alocation->>'tables') || ' ==' ||e'\n\n';
-  l_result := l_result ||
-    (select string_agg(
-                '=== '||(j->>'table_name')||e' ===\n\n'||
-                replace(coalesce(j->'doc_data'->>'root', j->>'description', ''), e'\n\n', '<br />')||e'\n\n'||
-                e'{| class="wikitable"\n|+ '||(alocation->>'table_columns')||e'\n|-\n'||
-                '!'||(alocation->>'column_no_th')||'!!'||(alocation->>'column_name_th')||'!!'||(alocation->>'data_type_th')||
-                '!!'||(alocation->>'default_value_th')||'!!'||(alocation->>'nullable_th')||'!!'||(alocation->>'primary_key_th')||
-                '!!'||(alocation->>'foreign_key_th')||'!!'||(alocation->>'description_th')||e'\n'||
-                cols||
-                e'\n|}\n',
-            '' order by j->>'table_name')
-       from (select jsonb_array_elements(atables) j) t
-            join lateral (
-              select string_agg(
-                       e'|-\n'
-                       '|'||(c->>'column_no')||'||'||(c->>'column_name')||'||'||(c->>'data_type')||
-                       '||'||coalesce(c->>'default_value', '')||'||'||(c->>'nullable')||'||'||(c->>'primary_key')||
-                       '||'||(c->>'foreign_key')||'||'||(c->>'description')||e'\n',
-                     '') cols
-                from jsonb_array_elements(j->'columns') c
-            ) c on true);
-  --
-  return l_result;
-end;
-$$;
-
-
--- Completed on 2025-01-30 20:55:23
+-- Completed on 2025-01-30 22:49:45
 
 --
 -- PostgreSQL database dump complete
