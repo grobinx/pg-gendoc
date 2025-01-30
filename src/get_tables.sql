@@ -6,6 +6,8 @@ CREATE OR REPLACE FUNCTION gendoc.get_tables(aschema name, aoptions jsonb)
 AS $function$
 /**
  * Create jsonb with all usable information about tables on schema
+ *
+ * @summary collect information about tables
  * 
  * @param {name} aschema schema name
  * @param {jsonb} aoptions options
@@ -84,4 +86,4 @@ end;
 $function$;
 
 ALTER FUNCTION gendoc.get_tables(aschema name, aoptions jsonb) OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.get_tables(aschema name, aoptions jsonb) IS 'Create jsonb with all usable information about tables on schemat';
+COMMENT ON FUNCTION gendoc.get_tables(aschema name, aoptions jsonb) IS '';

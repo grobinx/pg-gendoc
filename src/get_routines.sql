@@ -6,6 +6,8 @@ CREATE OR REPLACE FUNCTION gendoc.get_routines(aschema name, aoptions jsonb)
 AS $function$
 /**
  * Create jsonb with all usable information about routines on schema
+ *
+ * @summary collect usable information
  * 
  * @param {name} aschema schema name
  * @param {jsonb} aoptions options
@@ -74,4 +76,4 @@ end;
 $function$;
 
 ALTER FUNCTION gendoc.get_routines(aschema name, aoptions jsonb) OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.get_routines(aschema name, aoptions jsonb) IS 'Create jsonb with all usable information about functions on schema';
+COMMENT ON FUNCTION gendoc.get_routines(aschema name, aoptions jsonb) IS '';

@@ -1,0 +1,2770 @@
+<html>
+
+<head>
+    <link media="all" rel="stylesheet" href="gendoc.css" />
+</head>
+
+<body>
+    <section><span>2025-01-30 20:38:43</span>
+        <h1>Schema "gendoc" - Version 2.0.0</h1>
+        <section id="toc">
+            <h2>Table of content</h2>
+            <ol>
+                <li><a href="#routines" />Routines</a>
+                    <ol>
+                        <li><a href="#get_collect_info"><code>get_collect_info</code></a><span>Collect info</span></li>
+                        <li><a href="#get_package_version"><code>get_package_version</code></a><span>get package
+                                version</span></li>
+                        <li><a href="#get_routine_doc"><code>get_routine_doc</code></a><span>parse one routine
+                                doc</span></li>
+                        <li><a href="#get_routines"><code>get_routines</code></a><span>collect usable information</span>
+                        </li>
+                        <li><a href="#get_schema"><code>get_schema</code></a><span>Create jsonb with all usable
+                                information about schema</span></li>
+                        <li><a href="#get_tables"><code>get_tables</code></a><span>collect information about
+                                tables</span></li>
+                        <li><a href="#get_translation"><code>get_translation</code></a><span>The function includes
+                                language translations</span></li>
+                        <li><a href="#get_views"><code>get_views</code></a><span>collect information about views</span>
+                        </li>
+                        <li><a href="#html"><code>html</code></a><span>generate html document</span></li>
+                        <li><a href="#html_create_toc"><code>html_create_toc</code></a><span>toc for all objects
+
+                                Level 1</span></li>
+                        <li><a href="#html_doc_data_param"><code>html_doc_data_param</code></a><span>create information
+                                about arguments</span></li>
+                        <li><a href="#html_doc_data_prop"><code>html_doc_data_prop</code></a><span>create information
+                                about properties</span></li>
+                        <li><a href="#html_doc_data_uni"><code>html_doc_data_uni</code></a><span>create uniwersal for
+                                all obejcts information</span></li>
+                        <li><a href="#html_routine"><code>html_routine</code></a><span>Create one routine html
+                                section</span></li>
+                        <li><a href="#html_routines"><code>html_routines</code></a><span>Create routines html
+                                section</span></li>
+                        <li><a href="#html_schema"><code>html_schema</code></a><span>Create schema html section</span>
+                        </li>
+                        <li><a href="#html_series_toc"><code>html_series_toc</code></a><span>Create table of content
+                                from jsonb array as HTML code
+
+                                Level 2</span></li>
+                        <li><a href="#html_table"><code>html_table</code></a><span>Create one table html section</span>
+                        </li>
+                        <li><a href="#html_tables"><code>html_tables</code></a><span>Create tables html section</span>
+                        </li>
+                        <li><a href="#html_view"><code>html_view</code></a><span>Create one view html section</span>
+                        </li>
+                        <li><a href="#html_views"><code>html_views</code></a><span>Create views html section</span></li>
+                        <li><a href="#is_private_routine"><code>is_private_routine</code></a><span>Check is routine is
+                                set as private. If not set as private, returns false.</span></li>
+                        <li><a href="#is_public_routine"><code>is_public_routine</code></a><span>Check is routine is set
+                                as public. If not set as public, function returns true</span></li>
+                        <li><a href="#is_test_routine"><code>is_test_routine</code></a><span>Check is routine is set as
+                                test.</span></li>
+                        <li><a href="#jsdoc_parse"><code>jsdoc_parse</code></a><span>Function parse jsdoc and returns
+                                jsonb structure<br />
+                                Function remove comment characters from string.</span></li>
+                        <li><a href="#markdown"><code>markdown</code></a><span>generate md document</span></li>
+                        <li><a href="#md_create_toc"><code>md_create_toc</code></a><span>Create table of content for all
+                                series
+                                Level 1</span></li>
+                        <li><a href="#md_doc_data_param"><code>md_doc_data_param</code></a><span>Creates a collection of
+                                information from doc_data about parameters</span></li>
+                        <li><a href="#md_doc_data_prop"><code>md_doc_data_prop</code></a><span>Creates a collection of
+                                information from doc_data about properties</span></li>
+                        <li><a href="#md_doc_data_uni"><code>md_doc_data_uni</code></a><span>Creates a collection of
+                                information from doc_data</span></li>
+                        <li><a href="#md_routine"><code>md_routine</code></a><span>Create one routine markdown
+                                section</span></li>
+                        <li><a href="#md_routines"><code>md_routines</code></a><span>Create routines markdown
+                                section</span></li>
+                        <li><a href="#md_schema"><code>md_schema</code></a><span>Create schema markdown section</span>
+                        </li>
+                        <li><a href="#md_series_toc"><code>md_series_toc</code></a><span>Create table of content from
+                                jsonb array as MarkDown code
+
+                                Level 2</span></li>
+                        <li><a href="#md_table"><code>md_table</code></a><span>Create one table markdown section</span>
+                        </li>
+                        <li><a href="#md_tables"><code>md_tables</code></a><span>Create tables markdown section</span>
+                        </li>
+                        <li><a href="#md_view"><code>md_view</code></a><span>Create one view markdown section</span>
+                        </li>
+                        <li><a href="#md_views"><code>md_views</code></a><span>Create views markdown section</span></li>
+                        <li><a href="#version"><code>version</code></a><span>Version of this package</span></li>
+                        <li><a href="#wiki"><code>wiki</code></a></li>
+                        <li><a href="#wiki_create_toc"><code>wiki_create_toc</code></a><span>Create table of content for
+                                all series
+                                Level 1</span></li>
+                        <li><a href="#wiki_series_toc"><code>wiki_series_toc</code></a><span>Create table of content
+                                from jsonb array as Wiki markup code
+
+                                Level 2</span></li>
+                        <li><a href="#wiki_tables"><code>wiki_tables</code></a><span>Create tables wiki section</span>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </section>
+        <section id="routines">
+            <h2>Routines</h2>
+            <section><a name="get_collect_info"></a>
+                <h3>get_collect_info <small>(function)</small></h3>
+                <code>get_collect_info(aschema, aoptions<sup>opt</sup>) <span>→ record</code>
+                <p>Collects complete information about objects and returns it in the form of a record</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aoptions</td>
+                            <td>jsonb</td>
+                            <td>NULL::json</td>
+                            <td>in</td>
+                            <td>options to generate documentation</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Properties</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>aoptions.objects</td>
+                            <td>string[]</td>
+                            <td></td>
+                            <td>objects that are to appear in the documentation (routines, tables, views)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                    <dt>See</dt>
+                    <dd>
+                        <ul>
+                            <li>get_routines </li>
+                            <li>get_tables </li>
+                            <li>get_views </li>
+                            <li>get_schema </li>
+                        </ul>
+                    </dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>Collect info</p>
+                <h4>Returns</h4>
+                <p>schema, version, routines, tables, views</p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>TABLE(schema jsonb, version character varying, routines jsonb, tables jsonb, views jsonb)</code>
+                    </dd>
+                </dl>
+            </section>
+            <section><a name="get_package_version"></a>
+                <h3>get_package_version <small>(function)</small></h3>
+                <code>get_package_version(aschema) <span>→ text</code>
+                <p>Get schema/package version by calling schema.version() function</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Since</dt>
+                    <dd>1.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-24</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>get package version</p>
+                <h4>Returns</h4>
+                <p>major.minor.release or null</p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="get_routine_doc"></a>
+                <h3>get_routine_doc <small>(function)</small></h3>
+                <code>get_routine_doc(aschema, aroutine) <span>→ jsonb</code>
+                <p>Function parse jsdoc data from body by identity name.</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aroutine</td>
+                            <td>text</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routine identity name</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-25</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>parse one routine doc</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>jsonb</code></dd>
+                </dl>
+            </section>
+            <section><a name="get_routines"></a>
+                <h3>get_routines <small>(function)</small></h3>
+                <code>get_routines(aschema, aoptions) <span>→ jsonb</code>
+                <p>Create jsonb with all usable information about routines on schema</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aoptions</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>options</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Properties</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>aoptions.routines.include</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>include routines or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.routines.exclude</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>exclude routines or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.package</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>package names or null if all and if aoptions.parse.routine_body set to true</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.module</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>module names or null if all and if aoptions.parse.routine_body set to true</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.parse.routine_body</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>parse body for search documentation if plpgsql, otherwise the comment will be processed
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-25</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>collect usable information</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>jsonb</code></dd>
+                </dl>
+            </section>
+            <section><a name="get_schema"></a>
+                <h3>get_schema <small>(function)</small></h3><code>get_schema(aschema, aoptions) <span>→ jsonb</code>
+                <p>Create jsonb with all usable information about schema</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aoptions</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>options</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Properties</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>aoptions.parse.schema_comment</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>whether the schema comment should be processed</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-25</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>jsonb</code></dd>
+                </dl>
+            </section>
+            <section><a name="get_tables"></a>
+                <h3>get_tables <small>(function)</small></h3><code>get_tables(aschema, aoptions) <span>→ jsonb</code>
+                <p>Create jsonb with all usable information about tables on schema</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aoptions</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>options</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Properties</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>aoptions.tables.include</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>include tables or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.tables.exclude</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>exclude tables or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.package</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>package names or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.module</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>module names or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.parse.table_comment</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>parse doc table comment</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.parse.table_column_comment</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>parse doc table column comment</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-24</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>collect information about tables</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>jsonb</code></dd>
+                </dl>
+            </section>
+            <section><a name="get_translation"></a>
+                <h3>get_translation <small>(function)</small></h3><code>get_translation(alocation) <span>→ jsonb</code>
+                <p>The function includes language translations</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>alocation</td>
+                            <td>character varying</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>location shortcut (eg pl, en, ch)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p>translation</p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>jsonb</code></dd>
+                </dl>
+            </section>
+            <section><a name="get_views"></a>
+                <h3>get_views <small>(function)</small></h3><code>get_views(aschema, aoptions) <span>→ jsonb</code>
+                <p>Create jsonb with all usable information about views on schema</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aoptions</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>options</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Properties</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>aoptions.views.include</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>include views or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.views.exclude</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>exclude views or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.package</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>package names or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.module</td>
+                            <td>varchar[]</td>
+                            <td></td>
+                            <td>module names or null if all</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.parse.view_comment</td>
+                            <td>boolean</td>
+                            <td>true</td>
+                            <td>parse doc table comment</td>
+                        </tr>
+                        <tr>
+                            <td>aoptions.parse.view_column_comment</td>
+                            <td>boolean</td>
+                            <td>false</td>
+                            <td>parse doc table column comment</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-25</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>collect information about views</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>jsonb</code></dd>
+                </dl>
+            </section>
+            <section><a name="html"></a>
+                <h3>html <small>(function)</small></h3><code>html(aschema, aoptions<sup>opt</sup>) <span>→ text</code>
+                <p>Creates html document with all objects information</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aoptions</td>
+                            <td>jsonb</td>
+                            <td>NULL::jsonb</td>
+                            <td>in</td>
+                            <td>generate settings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-20</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>generate html document</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_create_toc"></a>
+                <h3>html_create_toc <small>(function)</small></h3>
+                <code>html_create_toc(aroutines, atables, aviews, alocation) <span>→ text</code>
+                <p>Create table of content for all series</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aroutines</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routines series</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>atables</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tables series</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>aviews</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>views series</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>toc for all objects
+
+                    Level 1</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_doc_data_param"></a>
+                <h3>html_doc_data_param <small>(function)</small></h3>
+                <code>html_doc_data_param(adoc_data, aarguments, alocation) <span>→ text</code>
+                <p>Creates a collection of information from doc_data about arguments</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>adoc_data</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>doc data</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aarguments</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routine arguments</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-28</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>create information about arguments</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_doc_data_prop"></a>
+                <h3>html_doc_data_prop <small>(function)</small></h3>
+                <code>html_doc_data_prop(adoc_data, alocation) <span>→ text</code>
+                <p>Creates a collection of information from doc_data about properties</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>adoc_data</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tabl</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-28</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>create information about properties</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_doc_data_uni"></a>
+                <h3>html_doc_data_uni <small>(function)</small></h3>
+                <code>html_doc_data_uni(adoc_data, alocation) <span>→ text</code>
+                <p>Creates a collection of uniwersal information from doc_data</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>adoc_data</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tabl</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-27</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>create uniwersal for all obejcts information</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_routine"></a>
+                <h3>html_routine <small>(function)</small></h3>
+                <code>html_routine(aroutine, alocation) <span>→ text</code>
+                <p>Create one routine html section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aroutine</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>atable</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td></td>
+                            <td>tabl</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-27</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_routines"></a>
+                <h3>html_routines <small>(function)</small></h3>
+                <code>html_routines(aroutines, alocation) <span>→ text</code>
+                <p>Create routines html section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aroutines</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routine series</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-28</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_schema"></a>
+                <h3>html_schema <small>(function)</small></h3><code>html_schema(aschema, alocation) <span>→ text</code>
+                <p>Create schema html section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>atable</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td></td>
+                            <td>tabl</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-30</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_series_toc"></a>
+                <h3>html_series_toc <small>(function)</small></h3>
+                <code>html_series_toc(aitems, aname) <span>→ text</code>
+                <p>Create table of content from jsonb array as HTML code
+                    <br /><br />Level 2
+                </p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aitems</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>array with elements</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aname</td>
+                            <td>character varying</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>item name to show</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_table"></a>
+                <h3>html_table <small>(function)</small></h3><code>html_table(atable, alocation) <span>→ text</code>
+                <p>Create one table html section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>atable</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tabl</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-27</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_tables"></a>
+                <h3>html_tables <small>(function)</small></h3><code>html_tables(atables, alocation) <span>→ text</code>
+                <p>Create tables html section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>atables</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tables series</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_view"></a>
+                <h3>html_view <small>(function)</small></h3><code>html_view(aview, alocation) <span>→ text</code>
+                <p>Create one view html section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aview</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>view</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-97</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="html_views"></a>
+                <h3>html_views <small>(function)</small></h3><code>html_views(aviews, alocation) <span>→ text</code>
+                <p>Create views html section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aviews</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>atables</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td></td>
+                            <td>views series</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-29</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="is_private_routine"></a>
+                <h3>is_private_routine <small>(function)</small></h3>
+                <code>is_private_routine(aschema, aroutine) <span>→ boolean</code>
+                <p>Check is routine is set as private. If not set as private, returns false.</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aroutine</td>
+                            <td>text</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routine identity name</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-25</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>boolean</code></dd>
+                </dl>
+            </section>
+            <section><a name="is_public_routine"></a>
+                <h3>is_public_routine <small>(function)</small></h3>
+                <code>is_public_routine(aschema, aroutine) <span>→ boolean</code>
+                <p>Check is routine is set as public. If not set as public, function returns true</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aroutine</td>
+                            <td>text</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routine identity name</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-25</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>boolean</code></dd>
+                </dl>
+            </section>
+            <section><a name="is_test_routine"></a>
+                <h3>is_test_routine <small>(function)</small></h3>
+                <code>is_test_routine(aschema, aroutine) <span>→ boolean</code>
+                <p>Check is routine is set as test.</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aroutine</td>
+                            <td>text</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routine identity name</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-6</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>boolean</code></dd>
+                </dl>
+            </section>
+            <section><a name="jsdoc_parse"></a>
+                <h3>jsdoc_parse <small>(function)</small></h3><code>jsdoc_parse(str) <span>→ jsonb</code>
+                <p>Function parse jsdoc and returns jsonb structure<br /><br />Function remove comment characters from
+                    string.</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>str</td>
+                            <td>character varying</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>string to parse</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>cmtdoc parser (https://github.com/grobinx/cmtdoc-parser)</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.1.12</dd>
+                    <dt>Created</dt>
+                    <dd>Wed Jan 29 2025 17:25:24 GMT+0100 (czas środkowoeuropejski standardowy)</dd>
+                </dl>
+                <h4>Example</h4><code><pre>select p.proname, jsdoc_parse(p.doc) as doc, p.arguments, p.description
+      from (select p.proname, substring(p.prosrc from '\/\*\*.*\*\/') as doc, 
+                   coalesce(pg_get_function_arguments(p.oid), '') arguments,
+                   d.description
+              from pg_proc p
+                   join pg_namespace n on n.oid = p.pronamespace
+                   left join pg_description d on d.classoid = 'pg_proc'::regclass and d.objoid = p.oid and d.objsubid = 0
+             where n.nspname = :scema_name
+               and p.prokind in ('p', 'f')) p
+     where p.doc is not null</pre></code>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>jsonb</code></dd>
+                </dl>
+            </section>
+            <section><a name="markdown"></a>
+                <h3>markdown <small>(function)</small></h3>
+                <code>markdown(aschema, aoptions<sup>opt</sup>) <span>→ text</code>
+                <p>Creates markdown document with all objects information</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>schema name</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aoptions</td>
+                            <td>jsonb</td>
+                            <td>NULL::jsonb</td>
+                            <td>in</td>
+                            <td>generate settings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-20</dd>
+                </dl>
+                <h4>Summary</h4>
+                <p>generate md document</p>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_create_toc"></a>
+                <h3>md_create_toc <small>(function)</small></h3>
+                <code>md_create_toc(aroutines, atables, aviews, alocation) <span>→ text</code>
+                <p>Create table of content for all series<br />Level 1</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aroutines</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routines series</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>atables</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tables series</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>aviews</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>views series</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_doc_data_param"></a>
+                <h3>md_doc_data_param <small>(function)</small></h3>
+                <code>md_doc_data_param(adoc_data, aarguments, alocation) <span>→ text</code>
+                <p>Creates a collection of information from doc_data about parameters</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>adoc_data</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>doc data</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aarguments</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routine arguments</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-29</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_doc_data_prop"></a>
+                <h3>md_doc_data_prop <small>(function)</small></h3>
+                <code>md_doc_data_prop(adoc_data, alocation) <span>→ text</code>
+                <p>Creates a collection of information from doc_data about properties</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>adoc_data</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tabl</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-28</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_doc_data_uni"></a>
+                <h3>md_doc_data_uni <small>(function)</small></h3>
+                <code>md_doc_data_uni(adoc_data, alocation) <span>→ text</code>
+                <p>Creates a collection of information from doc_data</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>adoc_data</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tabl</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-29</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_routine"></a>
+                <h3>md_routine <small>(function)</small></h3><code>md_routine(aroutine, alocation) <span>→ text</code>
+                <p>Create one routine markdown section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aroutine</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>atable</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td></td>
+                            <td>tabl</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-29</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_routines"></a>
+                <h3>md_routines <small>(function)</small></h3>
+                <code>md_routines(aroutines, alocation) <span>→ text</code>
+                <p>Create routines markdown section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aroutines</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routine series</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-29</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_schema"></a>
+                <h3>md_schema <small>(function)</small></h3><code>md_schema(aschema, alocation) <span>→ text</code>
+                <p>Create schema markdown section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>atable</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td></td>
+                            <td>tabl</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-30</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_series_toc"></a>
+                <h3>md_series_toc <small>(function)</small></h3><code>md_series_toc(aitems, aname) <span>→ text</code>
+                <p>Create table of content from jsonb array as MarkDown code
+                    <br /><br />Level 2
+                </p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aitems</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>array with elements</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aname</td>
+                            <td>character varying</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>item name to show</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_table"></a>
+                <h3>md_table <small>(function)</small></h3><code>md_table(atable, alocation) <span>→ text</code>
+                <p>Create one table markdown section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>atable</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tabl</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-29</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_tables"></a>
+                <h3>md_tables <small>(function)</small></h3><code>md_tables(atables, alocation) <span>→ text</code>
+                <p>Create tables markdown section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>atables</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tables series</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_view"></a>
+                <h3>md_view <small>(function)</small></h3><code>md_view(aview, alocation) <span>→ text</code>
+                <p>Create one view markdown section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aview</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>aviewe</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td></td>
+                            <td>view</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-29</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="md_views"></a>
+                <h3>md_views <small>(function)</small></h3><code>md_views(aviews, alocation) <span>→ text</code>
+                <p>Create views markdown section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aviews</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>views series</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-29</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="version"></a>
+                <h3>version <small>(function)</small></h3><code>version() <span>→ character varying</code>
+                <p>Version of this package</p>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Since</dt>
+                    <dd>1.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-24</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p>major.minor.release</p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>character varying</code></dd>
+                </dl>
+            </section>
+            <section><a name="wiki"></a>
+                <h3>wiki <small>(function)</small></h3><code>wiki(aschema, aoptions<sup>opt</sup>) <span>→ text</code>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aschema</td>
+                            <td>name</td>
+                            <td></td>
+                            <td>in</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aoptions</td>
+                            <td>jsonb</td>
+                            <td>NULL::jsonb</td>
+                            <td>in</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl></dl>
+                <h4>Returns</h4>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="wiki_create_toc"></a>
+                <h3>wiki_create_toc <small>(function)</small></h3>
+                <code>wiki_create_toc(aroutines, atables, aviews, alocation) <span>→ text</code>
+                <p>Create table of content for all series<br />Level 1</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aroutines</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>routines series</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>atables</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tables series</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>aviews</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>views series</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="wiki_series_toc"></a>
+                <h3>wiki_series_toc <small>(function)</small></h3>
+                <code>wiki_series_toc(aitems, aname) <span>→ text</code>
+                <p>Create table of content from jsonb array as Wiki markup code
+                    <br /><br />Level 2
+                </p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>aitems</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>array with elements</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>aname</td>
+                            <td>character varying</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>item name to show</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-26</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+            <section><a name="wiki_tables"></a>
+                <h3>wiki_tables <small>(function)</small></h3><code>wiki_tables(atables, alocation) <span>→ text</code>
+                <p>Create tables wiki section</p>
+                <h4>Arguments</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Data type</th>
+                            <th>Default value</th>
+                            <th>Mode</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>atables</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tables series</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>alocation</td>
+                            <td>jsonb</td>
+                            <td></td>
+                            <td>in</td>
+                            <td>tarnslation strings</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <dl>
+                    <dt>Author</dt>
+                    <dd>
+                        <ul>
+                            <li>Andrzej Kałuża</li>
+                        </ul>
+                    </dd>
+                    <dt>Version</dt>
+                    <dd>1.0</dd>
+                    <dt>Since</dt>
+                    <dd>2.0</dd>
+                    <dt>Created</dt>
+                    <dd>2025-01-76</dd>
+                </dl>
+                <h4>Returns</h4>
+                <p></p>
+                <dl>
+                    <dt>Data type</dt>
+                    <dd><code>text</code></dd>
+                </dl>
+            </section>
+        </section>
+    </section><small>GENDOC 2.0.0 - Andrzej Kałuża</small>
+</body>
+
+</html>

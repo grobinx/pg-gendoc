@@ -1,4 +1,4 @@
-# Schemat "cron" - Wersja 1.1.14 - Pakiet ["core"]<small>&nbsp;	2025-01-29 23:13:39</small>
+# Schemat "cron" - Wersja 1.1.14 - Pakiet ["core"]<small>&nbsp;	2025-01-30 20:08:07</small>
 
 ## Spis treści
 
@@ -36,6 +36,44 @@
 3. [Widoki](#Widoki)
 	1. [`_crontab_l`](#_crontab_l) cron native line with id if exists
 	2. [`pg_list`](#pg_list) Lista aktualnych zadań
+
+
+## Schemat
+<section>
+<h3>Informacje ogólne</h3>
+<p>Na schemacie „cron” znajdują się funkcje do zarządzani mechanizmem cron, który jest odpowiedzialny za uruchamianie ustalonych przez użytkownika funkcji w określonym czasie oraz ich cykliczność. Schemat dodatkowo zawiera log zadań wykonanych oraz jedną tablicę słownikową dla zwracanych wartości przez funkcję cronalter().</p>
+<p>Cron jest uniksowym demonem zajmującym się cyklicznym wywoływaniem innych programów. Na potrzeby PostgreSQL został wykorzystany do wywoływania komend SQL oraz do wywołań pojedynczych, nie okresowych oraz wywołań niestandardowych nie obsługiwanych przez sam mechanizm (kwartał, trzecia sobota miesiąca, etc.).</p>
+<div class="alert">
+<h4>UWAGA</h4>
+<p>W przypadku dodawania zadań do CRON-a w bazach danych spiętych w cluster (np. PgPool) należy łączyć się zawsze do bazy danych, która jest masterem – nie przez PgPool.</p>
+</div>
+Definicja zadania w crontab:
+<code><pre># Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) or jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) 
+# |  |  |  |  |            or sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name command to be executed</pre></code>
+<p>Gwiazdka (*) oznacza wykonanie wszystkich wartości, np. „*” w kolumnie month oznacza, że zadanie będzie wykonywane każdego miesiąca.</p>
+<p>Parametry można oddzielać przecinkami, np. 1,3,6,16. Jeżeli w ten sposób zapiszemy parametr hour, zadania wykona się o godzinach 01:00 w nocy, 03:00, 06:00 oraz o 16:00.</p>
+<p>Parametry liczbowe mogą również przyjmować przedziały zapisane jako przedział (z kreską) jak np. 1-5, co również oznacza taki sam zapis jak 1,2,3,4,5.</p>
+<p>Istnieje również możliwość określenie zakresu co definiuje się przez znak ukośnika (/) np. 1-15/2 będzie oznaczało to samo co 1,3,5,7,9,11,13,15.</p>
+</section>
+<section>
+<h3>Sekwencja identyfikatora</h3>
+<p>Na schemacie CRON znajduje się sekwencja job_seq z której pobierany jest kolejny identyfikator zadania wstawianego do cron-a. Sekwencja ta sprawdza się w przypadku gdy na jednym serwerze znajduje się wyłącznie jedna baza danych z implementacją mechanizmu CRON.</p>
+<p>W przypadku gdy baz danych jest więcej należy skorzystać z globalnej numeracji, która jest zaimplementowana w mechanizmie CRON dla PostgreSQL. W celu uruchomienia mechanizmu należy w katalogu domowym PostgreSQL ./N.X/data utworzyć plik cron_id.seq i zapisać w nim pierwszą wartość sekwencji, np. 1. Od tego momentu wszystkie identyfikatory zadań we wszystkich bazach danych będą nadawane z globalnej sekwencji.</p>
+Jeśli posiadamy prawa administratora można również wywołać poniższe polecenie:
+<code><pre>do $$
+begin
+  perform cron._w_cron_id_seq('NNN');
+end; $$</pre></code>
+<p>Polecenie to spowoduje zapis wartości NNN do odpowiedniego pliku. NNN to ostatnia wartość sekwencji ze wszystkich maz danych.</p>
+</section>
+
 
 
 ## Funkcje i procedury
@@ -102,7 +140,13 @@ Dodaje nowe zadanie do crona.
 >
 > **Publiczne** true
 
-Przykład
+#### Do zrobienia
+
+zmienić active varchar na boolean
+
+
+
+#### Przykład
 
 ````sql
 -- Dodanie zadania do crona. Zadanie będzie się wykonywać co miesiąc 6 dnia miesiąca o godzinie 15:30.
@@ -184,7 +228,7 @@ Można dodać wywołanie tej funkcji jako codzienne zadanie CRON by log-i nie pr
 >
 > **Publiczne** true
 
-Przykład
+#### Przykład
 
 ````sql
 -- Poniższy przykład demonstruje jak dodać zadanie z czyszczeniem log-a. Zadanie to będzie wykonywane codziennie o godzinie 0:15.

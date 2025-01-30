@@ -6,6 +6,8 @@ CREATE OR REPLACE FUNCTION gendoc.get_translation(alocation character varying)
 AS $function$
 /**
  * The function includes language translations
+ *
+ * @summary translations
  * 
  * @param {varchar} alocation location shortcut (eg pl, en, ch)
  * @returns {jsonb} translation
@@ -124,4 +126,4 @@ end;
 $function$;
 
 ALTER FUNCTION gendoc.get_translation(alocation character varying) OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.get_translation(alocation character varying) IS 'The function includes language translations';
+COMMENT ON FUNCTION gendoc.get_translation(alocation character varying) IS '';

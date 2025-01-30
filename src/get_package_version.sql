@@ -7,6 +7,8 @@ AS $function$
 /**
  * Get schema/package version by calling schema.version() function
  *
+ * @summary get package version
+ *
  * @author Andrzej Kałuża
  * @created 2025-01-24
  * @return {varchar} major.minor.release or null
@@ -24,4 +26,4 @@ end;
 $function$;
 
 ALTER FUNCTION gendoc.get_package_version(aschema name) OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.get_package_version(aschema name) IS 'Get schema/package version by calling schema.version() function';
+COMMENT ON FUNCTION gendoc.get_package_version(aschema name) IS '';

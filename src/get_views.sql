@@ -6,6 +6,8 @@ CREATE OR REPLACE FUNCTION gendoc.get_views(aschema name, aoptions jsonb)
 AS $function$
 /**
  * Create jsonb with all usable information about views on schema
+ *
+ * @summary collect information about views
  * 
  * @param {name} aschema schema name
  * @param {jsonb} aoptions options
@@ -76,4 +78,4 @@ end;
 $function$;
 
 ALTER FUNCTION gendoc.get_views(aschema name, aoptions jsonb) OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.get_views(aschema name, aoptions jsonb) IS 'Create jsonb with all usable information about views on schema';
+COMMENT ON FUNCTION gendoc.get_views(aschema name, aoptions jsonb) IS '';

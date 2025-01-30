@@ -8,6 +8,8 @@ AS $function$
 /**
  * Create table of content for all series
  *
+ * @summary toc for all objects
+ *
  * Level 1
  * 
  * @param {jsonb} aroutines routines series
@@ -49,4 +51,4 @@ end;
 $function$;
 
 ALTER FUNCTION gendoc.html_create_toc(aroutines jsonb, atables jsonb, aviews jsonb, alocation jsonb) OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.html_create_toc(aroutines jsonb, atables jsonb, aviews jsonb, alocation jsonb) IS 'Create table of content for all series';
+COMMENT ON FUNCTION gendoc.html_create_toc(aroutines jsonb, atables jsonb, aviews jsonb, alocation jsonb) IS '';

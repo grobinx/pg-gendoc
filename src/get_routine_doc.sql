@@ -7,6 +7,8 @@ AS $function$
 /**
  * Function parse jsdoc data from body by identity name.
  *
+ * @summary parse one routine doc
+ *
  * @param {name} aschema schema name
  * @param {text} aroutine routine identity name
  * @returns {jsonb}
@@ -26,4 +28,4 @@ end;
 $function$;
 
 ALTER FUNCTION gendoc.get_routine_doc(aschema name, aroutine text) OWNER TO gendoc;
-COMMENT ON FUNCTION gendoc.get_routine_doc(aschema name, aroutine text) IS 'Function parse jsdoc data from body by identity name.';
+COMMENT ON FUNCTION gendoc.get_routine_doc(aschema name, aroutine text) IS '';
