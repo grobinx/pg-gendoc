@@ -6,7 +6,7 @@ The document can be created in HTML or MarkDown format.
 
 GENDOC allows you to process object comments and function and procedure documentation comments similarly to jsDoc.
 
-See [Comment Doc Parser](/grobinx/cmtdoc-parser)
+See [Comment Doc Parser](https://github.com/grobinx/cmtdoc-parser)
 
 ## Instalation
 
